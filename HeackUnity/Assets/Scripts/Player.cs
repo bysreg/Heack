@@ -4,17 +4,21 @@ using System.Collections;
 namespace Heack
 {
     public class Player : MonoBehaviour
-    {
-
-        Vector2 tilePos;
+    {                
         float playerZ;
 
         public int index;
+
+        [SerializeField]
+        float speed;
+
+        Vector3 direction;
 
         void Awake()
         {
             playerZ = transform.position.z;
 
+            Vector2 tilePos = new Vector2();
             switch(index)
             {
                 case 1:
@@ -30,7 +34,7 @@ namespace Heack
                     tilePos.x = 0; tilePos.y = GridArena.Instance.Height-1;
                     break;
             }
-            MoveQuadToTile(tilePos);
+            MoveToTile(tilePos);
         }
 
         void Update()
@@ -38,31 +42,61 @@ namespace Heack
             //test
             if(index == 1)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    tilePos.y += 1;
+                if (Input.GetKey(KeyCode.UpArrow))
+                {                    
+                    direction.y = 1;
+                    direction.x = 0;
                 }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    tilePos.x -= 1;
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {                    
+                    direction.y = 0;
+                    direction.x = -1;
                 }
-                else if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    tilePos.x += 1;
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {                    
+                    direction.y = 0;
+                    direction.x = 1;
                 }
-                else if (Input.GetKeyDown(KeyCode.DownArrow))
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {                    
+                    direction.y = -1;
+                    direction.x = 0;
+                }
+                else
                 {
-                    tilePos.y -= 1;
+                    direction.y = 0;
+                    direction.x = 0;
                 }
             }            
+            
+            MoveToward(direction);
 
-            MoveQuadToTile(tilePos);
+            //check if this player is out of bounds
+            //if(CheckOutOfBounds())
+            //{
+
+            //}
         }
 
-        void MoveQuadToTile(Vector2 tilePos)
+        void MoveToward(Vector3 direction)
+        {
+            transform.position += direction * Time.deltaTime * speed;            
+        }
+
+        void MoveToTile(Vector2 tilePos)
         {
             transform.position = new Vector3(tilePos.x, tilePos.y, playerZ);
         }
+
+        //bool CheckOutOfBounds()
+        //{
+
+        //    if (transform.position.x + 0.5f < -0.5f)
+        //    {
+        //        return true;
+        //    }
+        //    //if(transform.position.x - 0.5f > )
+        //}
     }
 
 }

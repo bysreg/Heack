@@ -32,6 +32,21 @@ namespace Heack
             private set { height = value; }
         }
 
+        public float GetRight()
+        {
+            return GetLeft() + Width;
+        }                               
+
+        //public float GetTop()
+        //{
+        //    //return 
+        //}
+
+        public float GetLeft()
+        {
+            return -0.5f;
+        }
+
         protected override void Awake()
         {
             base.Awake();
