@@ -72,7 +72,6 @@ namespace Heack
                 //{                    
                 //    if (direction.y == 1 && direction.x == 0) //if face up
                 //    {
-                //        print("Face up attack");
                 //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
                 //    }
                 //    else if (direction.y == -1 && direction.x == 0) //if face down
@@ -90,30 +89,33 @@ namespace Heack
                 //}
                 //else
                 //{
-                    if (Input.GetKey(KeyCode.UpArrow))
+                    if (!CheckOutOfBounds())
                     {
-                        direction.y = 1;
-                        direction.x = 0;
-                    }
-                    else if (Input.GetKey(KeyCode.LeftArrow))
-                    {
-                        direction.y = 0;
-                        direction.x = -1;
-                    }
-                    else if (Input.GetKey(KeyCode.RightArrow))
-                    {
-                        direction.y = 0;
-                        direction.x = 1;
-                    }
-                    else if (Input.GetKey(KeyCode.DownArrow))
-                    {
-                        direction.y = -1;
-                        direction.x = 0;
-                    }
-                    else
-                    {
-                        direction.y = 0;
-                        direction.x = 0;
+                        if (Input.GetKey(KeyCode.UpArrow))
+                        {
+                            direction.y = 1;
+                            direction.x = 0;
+                        }
+                        else if (Input.GetKey(KeyCode.LeftArrow))
+                        {
+                            direction.y = 0;
+                            direction.x = -1;
+                        }
+                        else if (Input.GetKey(KeyCode.RightArrow))
+                        {
+                            direction.y = 0;
+                            direction.x = 1;
+                        }
+                        else if (Input.GetKey(KeyCode.DownArrow))
+                        {
+                            direction.y = -1;
+                            direction.x = 0;
+                        }
+                        else
+                        {
+                            direction.y = 0;
+                            direction.x = 0;
+                        }
                     }
                 //}                    
             }
@@ -121,24 +123,27 @@ namespace Heack
 
         void MoveToward(Vector3 direction)
         {
-            if (direction.x == 0 && direction.y == 1)
+            if (!CheckOutOfBounds())
             {
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
-            }
-            else if (direction.x == -1 && direction.y == 0)
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
-            }
-            else if (direction.x == 1 && direction.y == 0)
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
-            }
-            else if (direction.x == 0 && direction.y == -1)
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
-            }
+                if (direction.x == 0 && direction.y == 1)
+                {
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
+                }
+                else if (direction.x == -1 && direction.y == 0)
+                {
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
+                }
+                else if (direction.x == 1 && direction.y == 0)
+                {
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
+                }
+                else if (direction.x == 0 && direction.y == -1)
+                {
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
+                }
 
-            transform.position += direction * Time.deltaTime * speed;
+                transform.position += direction * Time.deltaTime * speed;
+            }
         }
 
         void MoveToTile(Vector2 tilePos)
@@ -150,18 +155,26 @@ namespace Heack
         {
             if (transform.position.x + 0.5f < GridArena.Instance.GetLeft())
             {
+                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
+
                 return true;
             }
             if (transform.position.x - 0.5f > GridArena.Instance.GetRight())
             {
+                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
+
                 return true;
             }
             if (transform.position.y + 0.5f < GridArena.Instance.GetDown())
             {
+                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
+
                 return true;
             }
             if (transform.position.y - 0.5f > GridArena.Instance.GetTop())
             {
+                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
+
                 return true;
             }
 
