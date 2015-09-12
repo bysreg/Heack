@@ -72,10 +72,10 @@ namespace Heack
             MoveToward(direction);
 
             //check if this player is out of bounds
-            //if(CheckOutOfBounds())
-            //{
-
-            //}
+            if (CheckOutOfBounds())
+            {
+                print("dead");
+            }
         }
 
         void MoveToward(Vector3 direction)
@@ -88,15 +88,28 @@ namespace Heack
             transform.position = new Vector3(tilePos.x, tilePos.y, playerZ);
         }
 
-        //bool CheckOutOfBounds()
-        //{
+        bool CheckOutOfBounds()
+        {
 
-        //    if (transform.position.x + 0.5f < -0.5f)
-        //    {
-        //        return true;
-        //    }
-        //    //if(transform.position.x - 0.5f > )
-        //}
+            if (transform.position.x + 0.5f < GridArena.Instance.GetLeft())
+            {
+                return true;
+            }
+            if(transform.position.x - 0.5f > GridArena.Instance.GetRight())
+            {
+                return true;
+            }
+            if(transform.position.y + 0.5f < GridArena.Instance.GetDown())
+            {
+                return true;
+            }
+            if(transform.position.y - 0.5f > GridArena.Instance.GetTop())
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 
 }
