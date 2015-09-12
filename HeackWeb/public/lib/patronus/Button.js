@@ -1,5 +1,5 @@
 /*
-* Bitmap
+* Button
 *
 * Copyright (c) 2015 Mahardiansyah Kartika <mkartika@andrew.cmu.edu>.
 *
@@ -33,63 +33,44 @@ this.patronus = this.patronus || {};
     "use strict";
 
     /** 
-     * @class Bitmap
+     * @class Button
      * @constructor
-     * @extends createjs.Bitmap
+     * @extends patnonus.Bitmap
     **/
-    var Bitmap = function(imageOrUri) {
-        this.Bitmap_constructor(imageOrUri);
+    var Button = function(imageOrUri, imageOrUriHover) {
+        this.patronusBitmap_constructor(imageOrUri);
 
-        this.anchorX = 0;
-        this.anchorY = 0;
+        this.imageNormal = imageOrUri;
+        this.imageHover = imageOrUriHover;
+
+        //this.shadow = new createjs.Shadow("#000000", 6, 6, 10);
+
+        this.hover = false;
+        this.tween = null;
+        this.cursor = "pointer";
+        this.addEventListener("rollover", this);
+        this.addEventListener("rollout", this);
     }
-    var p = createjs.extend(Bitmap, createjs.Bitmap);
+    var p = createjs.extend(Button, patronus.Bitmap);
 
-    p.setPosition = function(x, y) {
-        this.x = x;
-        this.y = y;
-    }
+    // set up the handlers for mouseover / out:
+    p.handleEvent = function (evt) {
+        this.hover = (evt.type == "rollover");
 
-    p.getPosition = function() {
-        return {x: this.x, y: this.y};
-    }
-
-    p.setRotation = function(x){
-        this.rotation=x;
-    }
-
-    p.setScale = function(x, y) {
-        if (y) {
-            this.scaleX = x;
-            this.scaleY = y;            
+        if (this.hover) {
+            this.onHover(evt);
         } else {
-            this.scaleX = x;
-            this.scaleY = x;
-        }
+            this.onOut(evt);
+        }            
     }
 
-    p.getScale = function() {
-        return {x: this.scaleX, y: this.scaleY};
+    p.onHover = function(evt) {
+        this.image = this.imageHover;
     }
 
-    p.setAlpha = function(a) {
-        this.alpha = a;
+    p.onOut = function(evt) {
+        this.image = this.imageNormal;
     }
 
-    p.getAlpha = function() {
-        return this.alpha;
-    }
-
-    p.setAnchorPoint = function(x, y) {
-        this.regX = this.image.width * x;
-        this.regY = this.image.height * y;
-        this.anchorX = x;
-        this.anchorY = y;
-    }
-
-    p.getAnchorPoint = function() {
-        return {x: this.anchorX, y: this.anchorY};
-    }
-
-    patronus.Bitmap = createjs.promote(Bitmap, "Bitmap");
+    patronus.Button = createjs.promote(Button, "patronusBitmap");
 }());

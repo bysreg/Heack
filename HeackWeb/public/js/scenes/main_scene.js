@@ -13,6 +13,22 @@ this.patronus = this.patronus || {};
 		this.GameScene_constructor();
 		
 		// ATTRIBUTES
+		// left button
+		this.leftBtn = new patronus.Bitmap('img/arrow.png');
+		this.leftBtn.setPosition(canvas.width/2, canvas.height/2);
+		this.leftBtn.setRotation(180);
+        this.leftBtn.on("click", function(event) {
+        	console.log("click left");
+        }, this);
+		this.addChild(this.leftBtn);
+
+		// right button
+		this.rightBtn = new patronus.Bitmap('img/arrow.png');
+		this.rightBtn.setPosition(canvas.width/2, canvas.height/2);
+        this.rightBtn.on("click", function(event) {
+        	console.log("click down");
+        }, this);
+		this.addChild(this.rightBtn);
 
 		this.generateCircle();
 	}

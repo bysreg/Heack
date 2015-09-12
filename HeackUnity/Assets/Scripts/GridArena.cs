@@ -35,16 +35,21 @@ namespace Heack
         public float GetRight()
         {
             return GetLeft() + Width;
-        }                               
-
-        //public float GetTop()
-        //{
-        //    //return 
-        //}
+        }                                       
 
         public float GetLeft()
         {
             return -0.5f;
+        }
+
+        public float GetTop()
+        {
+            return GetDown() + Height;
+        }
+
+        public float GetDown()
+        {
+            return -0.5f; 
         }
 
         protected override void Awake()
