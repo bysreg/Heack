@@ -44,11 +44,11 @@ namespace Heack
             //test
             if(index == 1)
             {
-
-
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     //this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+
+                    //Debug.Log("Get Integer: " + this.gameObject.GetComponent<Animator>().GetFloat("Run_Front_A"));
 
                     if (direction.y == 1 && direction.x == 0) //if face up
                     {
