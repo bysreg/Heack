@@ -5,16 +5,19 @@ using BladeCast;
 namespace Heack
 {
     public class Player : MonoBehaviour
-    {                
+    {
         float playerZ;
 
         public int index;
 
         [SerializeField]
         float speed;
-        
+
+        [SerializeField]
+        float acceleroThreshold;
+
         Vector3 direction;
-        Vector2 recentLRFB;        
+        Vector2 recentLRFB;
 
         void Awake()
         {
@@ -27,7 +30,7 @@ namespace Heack
             playerZ = transform.position.z;
 
             Vector2 tilePos = new Vector2();
-            switch(index)
+            switch (index)
             {
                 case 1:
                     tilePos.x = 0; tilePos.y = 0;
@@ -39,7 +42,7 @@ namespace Heack
                     tilePos.x = GridArena.Instance.Width - 1; tilePos.y = GridArena.Instance.Height - 1;
                     break;
                 case 4:
-                    tilePos.x = 0; tilePos.y = GridArena.Instance.Height-1;
+                    tilePos.x = 0; tilePos.y = GridArena.Instance.Height - 1;
                     break;
             }
 
@@ -47,7 +50,7 @@ namespace Heack
         }
 
         void Update()
-        {                                    
+        {
             MoveViaAccelero(recentLRFB);
             MoveToward(direction); // for the accelerometer
             MoveViaKeyboard();
@@ -65,83 +68,77 @@ namespace Heack
             //test
             if (index == 1)
             {
-
-
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    //this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
-
-                    if (direction.y == 1 && direction.x == 0) //if face up
+                //if (Input.GetKeyDown(KeyCode.F))
+                //{                    
+                //    if (direction.y == 1 && direction.x == 0) //if face up
+                //    {
+                //        print("Face up attack");
+                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+                //    }
+                //    else if (direction.y == -1 && direction.x == 0) //if face down
+                //    {
+                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
+                //    }
+                //    else if (direction.y == 0 && direction.x == 1) //if face right
+                //    {
+                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
+                //    }
+                //    else if (direction.y == -0 && direction.x == -1) //if face left
+                //    {
+                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
+                //    }                                         
+                //}
+                //else
+                //{
+                    if (Input.GetKey(KeyCode.UpArrow))
                     {
-                        print ("Face up attack");
-
-                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+                        direction.y = 1;
+                        direction.x = 0;
+                    }
+                    else if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        direction.y = 0;
+                        direction.x = -1;
+                    }
+                    else if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        direction.y = 0;
+                        direction.x = 1;
+                    }
+                    else if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        direction.y = -1;
+                        direction.x = 0;
                     }
                     else
-                    if (direction.y == -1 && direction.x == 0) //if face down
                     {
-                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
+                        direction.y = 0;
+                        direction.x = 0;
                     }
-                    else
-                    if (direction.y == 0 && direction.x == 1) //if face right
-                    {
-                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
-                    }
-                    else
-                    if (direction.y == -0 && direction.x == -1) //if face left
-                    {
-                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
-                    }
-                }
-                else
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    direction.y = 1;
-                    direction.x = 0;
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    direction.y = 0;
-                    direction.x = -1;
-                }
-                else if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    direction.y = 0;
-                    direction.x = 1;
-                }
-                else if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    direction.y = -1;
-                    direction.x = 0;
-                }
-                else
-                {
-                    direction.y = 0;
-                    direction.x = 0;
-                }
-            }            
+                //}                    
+            }
         }
 
         void MoveToward(Vector3 direction)
         {
-            if(direction.x == 0 && direction.y == 1)
+            if (direction.x == 0 && direction.y == 1)
             {
-                 this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
             }
-            else if(direction.x == -1 && direction.y == 0 )
+            else if (direction.x == -1 && direction.y == 0)
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
             }
-            else if(direction.x == 1 && direction.y == 0)
+            else if (direction.x == 1 && direction.y == 0)
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
             }
             else if (direction.x == 0 && direction.y == -1)
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
-            }           
+            }
 
-            transform.position += direction * Time.deltaTime * speed;            
+            transform.position += direction * Time.deltaTime * speed;
         }
 
         void MoveToTile(Vector2 tilePos)
@@ -151,37 +148,36 @@ namespace Heack
 
         bool CheckOutOfBounds()
         {
-
             if (transform.position.x + 0.5f < GridArena.Instance.GetLeft())
             {
                 return true;
             }
-            if(transform.position.x - 0.5f > GridArena.Instance.GetRight())
+            if (transform.position.x - 0.5f > GridArena.Instance.GetRight())
             {
                 return true;
             }
-            if(transform.position.y + 0.5f < GridArena.Instance.GetDown())
+            if (transform.position.y + 0.5f < GridArena.Instance.GetDown())
             {
                 return true;
             }
-            if(transform.position.y - 0.5f > GridArena.Instance.GetTop())
+            if (transform.position.y - 0.5f > GridArena.Instance.GetTop())
             {
                 return true;
             }
 
             return false;
         }
-        
+
         void MoveViaAccelero(Vector2 recentLRFB)
         {
-            if(recentLRFB.x == 0 && recentLRFB.y == 0)
+            if (Mathf.Abs(recentLRFB.x) < acceleroThreshold && Mathf.Abs(recentLRFB.y) < acceleroThreshold)
             {
                 direction.x = 0;
                 direction.y = 0;
             }
-            else if(Mathf.Abs(recentLRFB.x) > Mathf.Abs(recentLRFB.y) )
+            else if (Mathf.Abs(recentLRFB.x) > Mathf.Abs(recentLRFB.y))
             {
-                if(recentLRFB.x > 0)
+                if (recentLRFB.x > 0)
                 {
                     direction.y = -1;
                     direction.x = 0;
@@ -194,7 +190,7 @@ namespace Heack
             }
             else
             {
-                if(recentLRFB.y > 0)
+                if (recentLRFB.y > 0)
                 {
                     direction.x = -1;
                     direction.y = 0;
@@ -217,9 +213,9 @@ namespace Heack
             if (float.TryParse(val_raw, out val_parsed))
             {
                 //print("LR : (" + msg.ControllerSource + ") " + val_parsed);
-                if(msg.ControllerSource == index)
+                if (msg.ControllerSource == index)
                 {
-                    recentLRFB.x = val_parsed;                                        
+                    recentLRFB.x = val_parsed;
                 }
             }
         }
@@ -231,9 +227,9 @@ namespace Heack
             if (float.TryParse(val_raw, out val_parsed))
             {
                 //print("FB : (" + msg.ControllerSource + ") " + val_parsed);
-                if(msg.ControllerSource == index)
+                if (msg.ControllerSource == index)
                 {
-                    recentLRFB.y = val_parsed;                    
+                    recentLRFB.y = val_parsed;
                 }
             }
         }
