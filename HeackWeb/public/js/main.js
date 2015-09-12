@@ -12,7 +12,7 @@ function init() {
 	createjs.Ticker.addEventListener('tick', onTick);
 	
 	// first scene
-	sceneManager.push(new patronus.main_scene());
+	sceneManager.push(new patronus.editor_scene());
 
 	init_device_orientation();
 }
