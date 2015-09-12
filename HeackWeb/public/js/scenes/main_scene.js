@@ -13,20 +13,32 @@ this.patronus = this.patronus || {};
 		this.GameScene_constructor();
 		
 		// ATTRIBUTES
+		var _this = this;
+
 		// left button
-		this.leftBtn = new patronus.Bitmap('img/arrow.png');
-		this.leftBtn.setPosition(canvas.width/2, canvas.height/2);
+		this.leftBtn = new patronus.Button('img/arrow.png');
+		this.leftBtn.image.onload = function() {_this.leftBtn.setAnchorPoint(.5, .5);};
+		this.leftBtn.setPosition(canvas.width/2 - 450, canvas.height/2);
 		this.leftBtn.setRotation(180);
         this.leftBtn.on("click", function(event) {
-        	console.log("click left");
+        	var msg = {
+				"type": "move",
+				"dir": "left"
+			};
+	        conn.sendMessage(msg, 0);
         }, this);
 		this.addChild(this.leftBtn);
 
 		// right button
-		this.rightBtn = new patronus.Bitmap('img/arrow.png');
-		this.rightBtn.setPosition(canvas.width/2, canvas.height/2);
+		this.rightBtn = new patronus.Button('img/arrow.png');
+		this.rightBtn.image.onload = function() {_this.rightBtn.setAnchorPoint(.5, .5);};
+		this.rightBtn.setPosition(canvas.width/2 + 450, canvas.height/2);
         this.rightBtn.on("click", function(event) {
-        	console.log("click down");
+        	var msg = {
+				"type": "move",
+				"dir": "right"
+			};
+	        conn.sendMessage(msg, 0);
         }, this);
 		this.addChild(this.rightBtn);
 

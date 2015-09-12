@@ -1,6 +1,6 @@
 function init_device_orientation() {
 	if (window.DeviceOrientationEvent) {
-		document.getElementById("doEvent").innerHTML = "DeviceOrientation";
+		//document.getElementById("doEvent").innerHTML = "DeviceOrientation";
 		// Listen for the deviceorientation event and handle the raw data
 		window.addEventListener('deviceorientation', function(eventData) {
 			// gamma is the left-to-right tilt in degrees, where right is positive
@@ -21,15 +21,27 @@ function init_device_orientation() {
 }
 
 function deviceOrientationHandler(tiltLR, tiltFB, dir) {
-	document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
-	document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
-	document.getElementById("doDirection").innerHTML = Math.round(dir);
+	//document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
+	var msg = {
+		"type": "tiltLR",
+		"val": tiltLR
+	};
+	conn.sendMessage(msg, 0);
+
+	//document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
+	var msg = {
+		"type": "tiltFB",
+		"val": tiltFB
+	};
+	conn.sendMessage(msg, 0);
+
+	//document.getElementById("doDirection").innerHTML = Math.round(dir);
 
 	// Apply the transform to the image
-	var logo = document.getElementById("imgLogo");
-	logo.style.webkitTransform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
-	logo.style.MozTransform = "rotate("+ tiltLR +"deg)";
-	logo.style.transform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+	//var logo = document.getElementById("imgLogo");
+	//logo.style.webkitTransform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
+	//logo.style.MozTransform = "rotate("+ tiltLR +"deg)";
+	//logo.style.transform = "rotate("+ tiltLR +"deg) rotate3d(1,0,0, "+ (tiltFB*-1)+"deg)";
 }			
 
 // Some other fun rotations to try...

@@ -13,6 +13,8 @@ function init() {
 	
 	// first scene
 	sceneManager.push(new patronus.main_scene());
+
+	init_device_orientation();
 }
 
 function getSceneManager() {
