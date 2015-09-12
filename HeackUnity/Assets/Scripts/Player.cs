@@ -119,6 +119,34 @@ namespace Heack
                     }
                 //}                    
             }
+            else if(index == 2)
+            {
+                if (Input.GetKey(KeyCode.W))
+                {
+                    direction.y = 1;
+                    direction.x = 0;
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    direction.y = 0;
+                    direction.x = -1;
+                }
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    direction.y = 0;
+                    direction.x = 1;
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    direction.y = -1;
+                    direction.x = 0;
+                }
+                else
+                {
+                    direction.y = 0;
+                    direction.x = 0;
+                }
+            }
         }
 
         void MoveToward(Vector3 direction)
