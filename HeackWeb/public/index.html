@@ -4,16 +4,39 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>Template</title>
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	
 	<!-- Required javascript libraries. Add your own libraries here. -->
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="/lib/connection.js"></script>
+	<script src="socket.io/socket.io.js"></script>
+	<script src="lib/connection.js"></script>
 
 	<!-- Load your controller's javascript here. -->
-	<script src="/js/controllerManager.js"></script>
+	<script src="js/controllerManager.js"></script>
+
+	<!-- Load other libraries here. -->
+	<script src="lib/easeljs-NEXT.combined.js"></script>
+	<script src="lib/tweenjs-NEXT.combined.js"></script>
+	<script src="lib/creatine-0.2.0.min.js"></script>	
+	
+	<!-- Patronus Library -->	
+	<script src='lib/patronus/Bitmap.js'></script>
+	<script src='lib/patronus/GameScene.js'></script>
+	<script src='lib/patronus/SceneManager.js'></script>
+
+	<!-- Code -->
+	<script src='js/main.js'></script>
+	
+	<!-- Scenes -->
+	<script src='js/scenes/main_scene.js'></script>	
+	
+	<body onload = "init();">
+		<canvas id='application-canvas' tabindex='0' class='fill-mode-KEEP_ASPECT' width='1920' height='1080' style='background-color: whitvisibility: visible; -webkit-user-select: none;'>
+			JavaScript Not Enabled.
+		</canvas>
+	</body>
+
 </body>
 </html>
