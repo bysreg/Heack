@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Heack
 {
-    public class GridArena : MonoBehaviour
+    public class GridArena : Common.Singleton<GridArena>
     {
         
         [SerializeField]
@@ -26,8 +26,15 @@ namespace Heack
             private set { width = value; }
         }
 
-        void Awake()
+        public int Height
         {
+            get { return height; }
+            private set { height = value; }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
             tilesArr = new Transform[height, width];
         }
 
@@ -50,7 +57,7 @@ namespace Heack
         void CreateTile(int x, int y, int type)
         {
             Transform tilePrefab = tilePrefabs[type];
-            Transform t = Instantiate(tilePrefabs[type], new Vector3(x, y, 0), Quaternion.identity) as Transform;
+            Transform t = GameObject.Instantiate(tilePrefabs[type], new Vector3(x, y, 0), Quaternion.identity) as Transform;
             t.name = tilePrefab.name + (y * height + x);
             t.parent = tilesLayer.transform;
             tilesArr[y, x] = t;
