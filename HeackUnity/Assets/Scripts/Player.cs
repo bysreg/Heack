@@ -12,8 +12,7 @@ namespace Heack
 
         [SerializeField]
         float speed;
-
-        [SerializeField]
+        
         Vector3 direction;
         Vector2 recentLRFB;        
 
