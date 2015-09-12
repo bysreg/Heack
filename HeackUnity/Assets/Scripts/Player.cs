@@ -41,6 +41,7 @@ namespace Heack
                     tilePos.x = 0; tilePos.y = GridArena.Instance.Height-1;
                     break;
             }
+
             MoveToTile(tilePos);
         }
 
@@ -60,11 +61,15 @@ namespace Heack
                 {                    
                     direction.y = 0;
                     direction.x = -1;
+
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
                 }
                 else if (Input.GetKey(KeyCode.RightArrow))
                 {                    
                     direction.y = 0;
                     direction.x = 1;
+
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
                 }
                 else if (Input.GetKey(KeyCode.DownArrow))
                 {                    
