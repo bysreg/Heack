@@ -14,7 +14,7 @@ namespace Heack
 
         Vector3 direction;
 
-        void Awake()
+        void Start()
         {
             playerZ = transform.position.z;
 
@@ -46,6 +46,8 @@ namespace Heack
                 {                    
                     direction.y = 1;
                     direction.x = 0;
+
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
                 }
                 else if (Input.GetKey(KeyCode.LeftArrow))
                 {                    
@@ -61,6 +63,8 @@ namespace Heack
                 {                    
                     direction.y = -1;
                     direction.x = 0;
+
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
                 }
                 else
                 {
