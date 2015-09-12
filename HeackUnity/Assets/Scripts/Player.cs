@@ -19,6 +19,14 @@ namespace Heack
         Vector3 direction;
         Vector2 recentLRFB;
 
+        enum Status
+        {
+            Attack, 
+            Defense, 
+        }
+
+        Status status;                
+
         void Awake()
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
