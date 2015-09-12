@@ -13,13 +13,14 @@ namespace Heack
 
         void InitControllerListeners()
         {
-            BCMessenger.Instance.RegisterListener("connect", 0, this.gameObject, "HandleControllerConnected");
+            BCMessenger.Instance.RegisterListener("connect", 0, this.gameObject, "HandleControllerConnected");            
         }
 
         void HandleControllerConnected()
         {
             print("Connected to controller");
         }
+                
     }
 
 }

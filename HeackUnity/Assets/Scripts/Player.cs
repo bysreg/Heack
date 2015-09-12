@@ -14,6 +14,7 @@ namespace Heack
         float speed;
 
         Vector3 direction;
+        Vector2 recentLRFB;        
 
         void Awake()
         {
@@ -46,46 +47,11 @@ namespace Heack
         }
 
         void Update()
-        {
-            //test
-            if(index == 1)
-            {
-                if (Input.GetKey(KeyCode.UpArrow))
-                {                    
-                    direction.y = 1;
-                    direction.x = 0;
-
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow))
-                {                    
-                    direction.y = 0;
-                    direction.x = -1;
-
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
-                }
-                else if (Input.GetKey(KeyCode.RightArrow))
-                {                    
-                    direction.y = 0;
-                    direction.x = 1;
-
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
-                }
-                else if (Input.GetKey(KeyCode.DownArrow))
-                {                    
-                    direction.y = -1;
-                    direction.x = 0;
-
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
-                }
-                else
-                {
-                    direction.y = 0;
-                    direction.x = 0;
-                }
-            }            
-            
-            MoveToward(direction);
+        {                                    
+            MoveViaAccelero(recentLRFB);
+            MoveToward(direction); // for the accelerometer
+            MoveViaKeyboard();
+            MoveToward(direction); // for the keyboard
 
             //check if this player is out of bounds
             if (CheckOutOfBounds())
@@ -94,8 +60,58 @@ namespace Heack
             }
         }
 
+        void MoveViaKeyboard()
+        {
+            //test
+            if (index == 1)
+            {
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    direction.y = 1;
+                    direction.x = 0;
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    direction.y = 0;
+                    direction.x = -1;
+                }
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    direction.y = 0;
+                    direction.x = 1;
+                }
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    direction.y = -1;
+                    direction.x = 0;
+                }
+                else
+                {
+                    direction.y = 0;
+                    direction.x = 0;
+                }
+            }            
+        }
+
         void MoveToward(Vector3 direction)
         {
+            if(direction.x == 0 && direction.y == 1)
+            {
+                 this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
+            }
+            else if(direction.x == -1 && direction.y == 0 )
+            {
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
+            }
+            else if(direction.x == 1 && direction.y == 0)
+            {
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
+            }
+            else if (direction.x == 0 && direction.y == -1)
+            {
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
+            }           
+
             transform.position += direction * Time.deltaTime * speed;            
         }
 
@@ -127,9 +143,42 @@ namespace Heack
             return false;
         }
         
-        void MoveViaAccelero()
+        void MoveViaAccelero(Vector2 recentLRFB)
         {
-            
+            if(recentLRFB.x == 0 && recentLRFB.y == 0)
+            {
+                direction.x = 0;
+                direction.y = 0;
+            }
+            else if(Mathf.Abs(recentLRFB.x) > Mathf.Abs(recentLRFB.y) )
+            {
+                if(recentLRFB.x > 0)
+                {
+                    direction.y = -1;
+                    direction.x = 0;
+                }
+                else
+                {
+                    direction.y = 1;
+                    direction.x = 0;
+                }
+            }
+            else
+            {
+                if(recentLRFB.y > 0)
+                {
+                    direction.x = -1;
+                    direction.y = 0;
+                }
+                else
+                {
+                    direction.x = 1;
+                    direction.y = 0;
+                }
+            }
+
+            recentLRFB.x = 0;
+            recentLRFB.y = 0;
         }
 
         void HandleTiltLR(ControllerMessage msg)
@@ -140,8 +189,8 @@ namespace Heack
             {
                 //print("LR : (" + msg.ControllerSource + ") " + val_parsed);
                 if(msg.ControllerSource == index)
-                {                    
-                    //MoveToward()
+                {
+                    recentLRFB.x = val_parsed;                                        
                 }
             }
         }
@@ -152,7 +201,11 @@ namespace Heack
             float val_parsed;
             if (float.TryParse(val_raw, out val_parsed))
             {
-                print("FB : (" + msg.ControllerSource + ") " + val_parsed);
+                //print("FB : (" + msg.ControllerSource + ") " + val_parsed);
+                if(msg.ControllerSource == index)
+                {
+                    recentLRFB.y = val_parsed;                    
+                }
             }
         }
     }
