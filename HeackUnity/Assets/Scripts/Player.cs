@@ -13,6 +13,7 @@ namespace Heack
         [SerializeField]
         float speed;
 
+        [SerializeField]
         Vector3 direction;
         Vector2 recentLRFB;        
 
@@ -65,6 +66,35 @@ namespace Heack
             //test
             if (index == 1)
             {
+
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    //this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+
+                    if (direction.y == 1 && direction.x == 0) //if face up
+                    {
+                        print ("Face up attack");
+
+                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+                    }
+                    else
+                    if (direction.y == -1 && direction.x == 0) //if face down
+                    {
+                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
+                    }
+                    else
+                    if (direction.y == 0 && direction.x == 1) //if face right
+                    {
+                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
+                    }
+                    else
+                    if (direction.y == -0 && direction.x == -1) //if face left
+                    {
+                        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
+                    }
+                }
+                else
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
                     direction.y = 1;
