@@ -186,6 +186,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11418656, guid: 69fd7bda31aa8234f811ce088f143487, type: 2}
+      propertyPath: url
+      value: ws://127.0.0.1:4567/socket.io/?EIO=3&transport=websocket
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69fd7bda31aa8234f811ce088f143487, type: 2}
   m_IsPrefabParent: 0
