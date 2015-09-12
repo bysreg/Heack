@@ -14,7 +14,7 @@ namespace Heack
 
         Vector3 direction;
 
-        void Awake()
+        void Start()
         {
             playerZ = transform.position.z;
 
