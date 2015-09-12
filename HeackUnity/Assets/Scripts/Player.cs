@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using BladeCast;
 
 namespace Heack
 {
@@ -13,6 +14,12 @@ namespace Heack
         float speed;
 
         Vector3 direction;
+
+        void Awake()
+        {
+            BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
+            BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
+        }
 
         void Start()
         {
@@ -113,6 +120,35 @@ namespace Heack
             }
 
             return false;
+        }
+        
+        void MoveViaAccelero()
+        {
+            
+        }
+
+        void HandleTiltLR(ControllerMessage msg)
+        {
+            string val_raw = msg.Payload.GetField("val").ToString();
+            float val_parsed;
+            if (float.TryParse(val_raw, out val_parsed))
+            {
+                //print("LR : (" + msg.ControllerSource + ") " + val_parsed);
+                if(msg.ControllerSource == index)
+                {                    
+                    //MoveToward()
+                }
+            }
+        }
+
+        void HandleTiltFB(ControllerMessage msg)
+        {
+            string val_raw = msg.Payload.GetField("val").ToString();
+            float val_parsed;
+            if (float.TryParse(val_raw, out val_parsed))
+            {
+                print("FB : (" + msg.ControllerSource + ") " + val_parsed);
+            }
         }
     }
 
