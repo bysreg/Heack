@@ -48,7 +48,7 @@ this.patronus = this.patronus || {};
         	var pos = [];
 	        for (var i = 0; i < 4; i++) {
 	        	// get normal position from byte
-	        	pos[i] = convertByteToPos(posBytes[i]);
+	        	pos[i] = this.convertByteToPos(posBytes[i]);
 	        	
 	        	// set player position
 	        	var realPos = this.convertUnityPosToCanvasPos(pos[i]);
@@ -60,8 +60,8 @@ this.patronus = this.patronus || {};
     p.convertUnityPosToCanvasPos = function(unityPos) {
     	var oneBlockSize = this._size * this.scale;
 
-    	var posX = this.firstPos.x + (((totalWidth - 1) - unityPos.x) * oneBlockSize);
-    	var posY = this.firstPos.y + (((totalHeight - 1) - unityPos.y) * oneBlockSize);
+    	var posX = this.firstPos.x + (((this.totalWidth - 1) - unityPos.x) * oneBlockSize);
+    	var posY = this.firstPos.y + (((this.totalHeight - 1) - unityPos.y) * oneBlockSize);
 
     	return {"x": posX, "y": posY};
     }
