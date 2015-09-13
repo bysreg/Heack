@@ -112,6 +112,24 @@ namespace Heack
                     }
                 }
             }
+
+            for (int i = 7; i < 29; i++)
+            {
+                for (int j = 7; j < 29; j++)
+                {
+                    int randomID = Random.Range(1, 10);
+
+                    if (randomID >= 1 && randomID < 8)
+                    {
+                        CreateWaterTile(j-11, i-11, 11);
+                    }
+                    else
+                    if (randomID >= 8 && randomID < 11)
+                    {
+                        CreateWaterTile(j-11, i-11, 12);
+                    }
+                }
+            }
         }
 
         void CreateTile(int x, int y, int type)
@@ -121,6 +139,15 @@ namespace Heack
             t.name = tilePrefab.name + (y * height + x);
             t.parent = tilesLayer.transform;
             tilesArr[y, x] = t;
+        }
+
+        void CreateWaterTile(int x, int y, int type)
+        {
+            Transform tilePrefab = tilePrefabs[type];
+            Transform t = GameObject.Instantiate(tilePrefabs[type], new Vector3(x, y - 0.25f, 0), Quaternion.identity) as Transform;
+            t.name = tilePrefab.name + (y * height + x);
+            t.parent = tilesLayer.transform;
+            //tilesArr[y, x] = t;
         }
     }
 
