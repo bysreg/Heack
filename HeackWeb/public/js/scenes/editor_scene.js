@@ -170,15 +170,18 @@ this.patronus = this.patronus || {};
 		for (var i = 0; i < this.totalWidth; i++) {
 			for (var j = 0; j < this.totalHeight; j++) {
 				var no = 5;
-				if (i == 0 && j == 0) no = 1;
-				else if (i == this.totalWidth-1 && j == 0) no = 3;
-				else if (i == 0 && j == this.totalHeight-1) no = 7;
-				else if (i == this.totalWidth-1 && j == this.totalHeight-1) no = 9;
-				else if (i == 0) no = 4;
-				else if (i == this.totalWidth-1) no = 6;
-				else if (j == 0) no = 2;
-				else if (j == this.totalHeight-1) no = 8;
 
+				// water
+				if (i == 0 || i == this.totalWidth-1 || j == 0 || j == this.totalHeight-1) no = 0;
+				// ground
+				else if (i == 1 && j == 1) no = 1;
+				else if (i == this.totalWidth-2 && j == 1) no = 3;
+				else if (i == 1 && j == this.totalHeight-2) no = 7;
+				else if (i == this.totalWidth-2 && j == this.totalHeight-2) no = 9;
+				else if (i == 1) no = 4;
+				else if (i == this.totalWidth-2) no = 6;
+				else if (j == 1) no = 2;
+				else if (j == this.totalHeight-2) no = 8;
 				var tile = this.generateSingleTile("tile_" + no);
 				tile.setPosition(this.firstPos.x + (i * this._size * this.scale), this.firstPos.y + (j * this._size * this.scale));
 				tile.setScale(this.scale * 2);
