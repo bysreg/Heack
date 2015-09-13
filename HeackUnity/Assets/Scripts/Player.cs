@@ -327,7 +327,8 @@ namespace Heack
 
         void Stunned()
         {
-            GameObject.Find("Tile_Effect").transform.Find("Thunder").gameObject.GetComponent<Animator>().CrossFade("Thunder", 0f); //play thunder animation
+            GameObject.Find("Tile_Effect").transform.Find("Thunder_Up").gameObject.GetComponent<Animator>().Play("Thunder_Up", 0f); //play thunder animation
+            GameObject.Find("Tile_Effect").transform.Find("Thunder_Down").gameObject.GetComponent<Animator>().Play("Thunder_Down", 0f); //play thunder animation
 
             GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation
 

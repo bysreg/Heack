@@ -27,7 +27,7 @@ AnimatorState:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Thunder
+  m_Name: Thunder_Up
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -39,7 +39,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 199d707d919b3394d8cb860850068ee2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 06983251dcf602940a4128d8c35f67ac, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -50,7 +50,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Thunder 0
+  m_Name: Thunder_Down
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -62,7 +62,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 199d707d919b3394d8cb860850068ee2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 24cd30fadf30c6c4fa8e401fb05f76e6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -80,7 +80,7 @@ AnimatorStateMachine:
     m_Position: {x: 312, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110246798}
-    m_Position: {x: 347, y: 5, z: 0}
+    m_Position: {x: 348, y: 12, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Thunder
+  m_Name: Thunder_Up
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,7 +18,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: a1503f53fb2a04b4aa8d73aaf54570f1, type: 3}
+      value: {fileID: 0}
     - time: .0833333358
       value: {fileID: 21300000, guid: a5a0f399a842f9942b2848d82c8a37cb, type: 3}
     - time: .166666672
@@ -59,7 +59,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: a1503f53fb2a04b4aa8d73aaf54570f1, type: 3}
+    - {fileID: 0}
     - {fileID: 21300000, guid: a5a0f399a842f9942b2848d82c8a37cb, type: 3}
     - {fileID: 21300000, guid: 0d2babaf85a6c504ea86e4cfaa54b793, type: 3}
     - {fileID: 21300000, guid: 37e54af797a0d8e4684bc1a870add352, type: 3}
