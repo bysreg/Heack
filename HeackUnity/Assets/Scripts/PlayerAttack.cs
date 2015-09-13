@@ -77,6 +77,11 @@ namespace Heack
             }
         }
 
+        public bool IsKnocked()
+        {
+            return isKnocked;
+        }
+
         void KnockedDown(Vector2 direction, GameObject from)
         {         
             isKnocked = true;
