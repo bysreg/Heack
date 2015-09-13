@@ -18,23 +18,22 @@ namespace Heack
         float acceleroThreshold;
 
         Vector3 direction;
-        Vector2 recentLRFB;
-
-        enum Status
+        Vector2 recentLRFB;           
+ 
+        public enum FaceDir
         {
-            Attack, 
-            Defense, 
+            Down = 0,
+            Up, 
+            Right, 
+            Left,             
         }
 
-        Status status;
-        static List<Status> statusList;
+        public FaceDir faceDir;
 
         void Awake()
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
-            BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
-
-            RandomizeStatus();
+            BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");            
         }
 
         void Start()
@@ -59,41 +58,7 @@ namespace Heack
             }
 
             MoveToTile(tilePos);
-        }
-
-        void RandomizeStatus()
-        {
-            if(statusList == null)
-            {
-                statusList = new List<Status>();
-                statusList.Add(Status.Attack);
-                statusList.Add(Status.Attack);
-                statusList.Add(Status.Defense);
-                statusList.Add(Status.Defense);
-                //shuffle the list
-                for (int i = 0; i < statusList.Count;i++ )
-                {
-                    Status temp = statusList[i];
-                    int shuffleIndex = Random.Range(i, statusList.Count);
-                    statusList[i] = statusList[shuffleIndex];
-                    statusList[shuffleIndex] = temp;
-                }
-            }
-
-            int random = Random.Range(0, statusList.Count);
-            status = statusList[random];
-            statusList.RemoveAt(random);
-            //print(index + " " + status);
-            switch (status)
-            { 
-                case Status.Attack:
-                    GetComponent<SpriteRenderer>().color = Color.red;
-                    break;
-                case Status.Defense:
-                    // TODO : 
-                    break;
-            }
-        }
+        }        
 
         void Update()
         {
@@ -114,56 +79,34 @@ namespace Heack
             //test
             if (index == 1)
             {
-                //if (Input.GetKeyDown(KeyCode.F))
-                //{                    
-                //    if (direction.y == 1 && direction.x == 0) //if face up
-                //    {
-                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
-                //    }
-                //    else if (direction.y == -1 && direction.x == 0) //if face down
-                //    {
-                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
-                //    }
-                //    else if (direction.y == 0 && direction.x == 1) //if face right
-                //    {
-                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
-                //    }
-                //    else if (direction.y == -0 && direction.x == -1) //if face left
-                //    {
-                //        this.gameObject.GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
-                //    }                                         
-                //}
-                //else
-                //{
-                    if (!CheckOutOfBounds())
+                if (!CheckOutOfBounds())
+                {
+                    if (Input.GetKey(KeyCode.UpArrow))
                     {
-                        if (Input.GetKey(KeyCode.UpArrow))
-                        {
-                            direction.y = 1;
-                            direction.x = 0;
-                        }
-                        else if (Input.GetKey(KeyCode.LeftArrow))
-                        {
-                            direction.y = 0;
-                            direction.x = -1;
-                        }
-                        else if (Input.GetKey(KeyCode.RightArrow))
-                        {
-                            direction.y = 0;
-                            direction.x = 1;
-                        }
-                        else if (Input.GetKey(KeyCode.DownArrow))
-                        {
-                            direction.y = -1;
-                            direction.x = 0;
-                        }
-                        else
-                        {
-                            direction.y = 0;
-                            direction.x = 0;
-                        }
+                        direction.y = 1;
+                        direction.x = 0;
                     }
-                //}                    
+                    else if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        direction.y = 0;
+                        direction.x = -1;
+                    }
+                    else if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        direction.y = 0;
+                        direction.x = 1;
+                    }
+                    else if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        direction.y = -1;
+                        direction.x = 0;
+                    }
+                    else
+                    {
+                        direction.y = 0;
+                        direction.x = 0;
+                    }
+                }                               
             }
             else if(index == 2)
             {
@@ -201,18 +144,22 @@ namespace Heack
             {
                 if (direction.x == 0 && direction.y == 1)
                 {
+                    faceDir = FaceDir.Up;
                     this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
                 }
                 else if (direction.x == -1 && direction.y == 0)
                 {
+                    faceDir = FaceDir.Left;
                     this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
                 }
                 else if (direction.x == 1 && direction.y == 0)
                 {
+                    faceDir = FaceDir.Right;
                     this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
                 }
                 else if (direction.x == 0 && direction.y == -1)
                 {
+                    faceDir = FaceDir.Down;
                     this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
                 }
 
@@ -319,7 +266,7 @@ namespace Heack
                     recentLRFB.y = val_parsed;
                 }
             }
-        }
+        }        
     }
 
 }
