@@ -287,6 +287,10 @@ Prefab:
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
+    - target: {fileID: 9570362, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 07ed108e570960b43bbc3be51a27e529, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
@@ -1141,7 +1145,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 296517585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 1681885756}
@@ -1263,6 +1267,10 @@ Prefab:
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
+    - target: {fileID: 9570362, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 966d1638f24c43c4f8a8cc8531b8aeb1, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
@@ -3517,6 +3525,15 @@ Prefab:
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
+    - target: {fileID: 9570362, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1285d2e1764ec3e4cb9ea7ae7f9d1262, type: 2}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f7d9e10ccaff2f243b04ffc0c6e481d6,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
