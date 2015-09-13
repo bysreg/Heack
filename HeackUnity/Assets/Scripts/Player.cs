@@ -133,89 +133,95 @@ namespace Heack
 
         void MoveViaKeyboard()
         {
-            //test
-            if (index == 1)
-            {                
-                if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    direction.y = 1;
-                    direction.x = 0;
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    direction.y = 0;
-                    direction.x = -1;
-                }
-                else if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    direction.y = 0;
-                    direction.x = 1;
-                }
-                else if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    direction.y = -1;
-                    direction.x = 0;
-                }
-                else
-                {
-                    direction.y = 0;
-                    direction.x = 0;
-                }                                               
-            }
-            else if(index == 2)
+            if (!playerAttack.isAfterAttack)
             {
-                if (Input.GetKey(KeyCode.W))
+                //test
+                if (index == 1)
                 {
-                    direction.y = 1;
-                    direction.x = 0;
+                    if (Input.GetKey(KeyCode.UpArrow))
+                    {
+                        direction.y = 1;
+                        direction.x = 0;
+                    }
+                    else if (Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        direction.y = 0;
+                        direction.x = -1;
+                    }
+                    else if (Input.GetKey(KeyCode.RightArrow))
+                    {
+                        direction.y = 0;
+                        direction.x = 1;
+                    }
+                    else if (Input.GetKey(KeyCode.DownArrow))
+                    {
+                        direction.y = -1;
+                        direction.x = 0;
+                    }
+                    else
+                    {
+                        direction.y = 0;
+                        direction.x = 0;
+                    }
                 }
-                else if (Input.GetKey(KeyCode.A))
+                else if (index == 2)
                 {
-                    direction.y = 0;
-                    direction.x = -1;
-                }
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    direction.y = 0;
-                    direction.x = 1;
-                }
-                else if (Input.GetKey(KeyCode.S))
-                {
-                    direction.y = -1;
-                    direction.x = 0;
-                }
-                else
-                {
-                    direction.y = 0;
-                    direction.x = 0;
+                    if (Input.GetKey(KeyCode.W))
+                    {
+                        direction.y = 1;
+                        direction.x = 0;
+                    }
+                    else if (Input.GetKey(KeyCode.A))
+                    {
+                        direction.y = 0;
+                        direction.x = -1;
+                    }
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        direction.y = 0;
+                        direction.x = 1;
+                    }
+                    else if (Input.GetKey(KeyCode.S))
+                    {
+                        direction.y = -1;
+                        direction.x = 0;
+                    }
+                    else
+                    {
+                        direction.y = 0;
+                        direction.x = 0;
+                    }
                 }
             }
         }
 
         void MoveToward(Vector3 direction)
-        {            
-            if (direction.x == 0 && direction.y == 1)
+        {
+            if (!playerAttack.isAfterAttack)
             {
-                faceDir = FaceDir.Up;
-                this.animator.CrossFade("Run_Back_A", 0f);
-            }
-            else if (direction.x == -1 && direction.y == 0)
-            {
-                faceDir = FaceDir.Left;                
-                this.animator.CrossFade("Run_Left_A", 0f);
-            }
-            else if (direction.x == 1 && direction.y == 0)
-            {
-                faceDir = FaceDir.Right;
-                this.animator.CrossFade("Run_Right_A", 0f);
-            }
-            else if (direction.x == 0 && direction.y == -1)
-            {
-                faceDir = FaceDir.Down;
-                this.animator.CrossFade("Run_Front_A", 0f);
-            }
+                if (direction.x == 0 && direction.y == 1)
+                {
+                    faceDir = FaceDir.Up;
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
+                }
+                else if (direction.x == -1 && direction.y == 0)
+                {
+                    faceDir = FaceDir.Left;
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
+                }
+                else if (direction.x == 1 && direction.y == 0)
+                {
+                    faceDir = FaceDir.Right;
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
+                }
+                else if (direction.x == 0 && direction.y == -1)
+                {
+                    faceDir = FaceDir.Down;
+                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
+                }
 
-            transform.position += direction * Time.deltaTime * speed;                        
+                transform.position += direction * Time.deltaTime * speed;
+            }                     
         }
 
         void MoveToTile(Vector2 tilePos)
