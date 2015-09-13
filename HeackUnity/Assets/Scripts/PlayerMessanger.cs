@@ -7,7 +7,7 @@ public class PlayerMessanger : MonoBehaviour {
 	
 	public Player[] players;
 	
-	float delay = 0.2f;
+	float delay = 0.15f;
 	float elapsedTime = 0f;
 
 	// Use this for initialization
