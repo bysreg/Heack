@@ -45,13 +45,12 @@ this.patronus = this.patronus || {};
         	posBytes[2] = (playerPositions >> 8) & 0xff;
         	posBytes[3] = playerPositions & 0xff;
 
-        	var pos = [];
 	        for (var i = 0; i < 4; i++) {
 	        	// get normal position from byte
-	        	pos[i] = this.convertByteToPos(posBytes[i]);
-	        	
+	        	var unityPos = this.convertByteToPos(posBytes[i]);
+	        	console.log(i + " (x: " + unityPos.x + ", y: " + unityPos.y + ") -> " + playerPositions);
 	        	// set player position
-	        	var realPos = this.convertUnityPosToCanvasPos(pos[i]);
+	        	var realPos = this.convertUnityPosToCanvasPos(unityPos);
 	        	this.players[i].setPosition(realPos.x, realPos.y);
 	        }
         }
@@ -60,15 +59,15 @@ this.patronus = this.patronus || {};
     p.convertUnityPosToCanvasPos = function(unityPos) {
     	var oneBlockSize = this._size * this.scale;
 
-    	var posX = this.firstPos.x + (((this.totalWidth - 1) - unityPos.x) * oneBlockSize);
+    	var posX = this.firstPos.x + (unityPos.x * oneBlockSize);
     	var posY = this.firstPos.y + (((this.totalHeight - 1) - unityPos.y) * oneBlockSize);
 
     	return {"x": posX, "y": posY};
     }
 
     p.convertByteToPos = function(byteVal) {
-    	var byteX = (byteVal >> 4) & 0x0f;
-    	var byteY = byteVal & 0x0f;
+    	var byteX = (byteVal >> 4) & 0x0000000f;
+    	var byteY = byteVal & 0x0000000f;
 
     	return {"x": byteX - 1, "y": byteY - 1};
     }
@@ -78,6 +77,7 @@ this.patronus = this.patronus || {};
 
     	for (var i = 0; i < 4; i++) {
     		var player = new patronus.Bitmap('img/face_icon/player' + (i + 1) + '.png');
+    		player.setScale(this.scale);
     		this.addChild(player);
 
     		players.push(player);
