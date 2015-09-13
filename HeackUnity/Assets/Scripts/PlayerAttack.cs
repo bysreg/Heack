@@ -6,6 +6,7 @@ namespace Heack
 {
     public class PlayerAttack : MonoBehaviour
     {
+        public bool isAfterAttack;
 
         public enum Status
         {
@@ -117,6 +118,42 @@ namespace Heack
             lastHitFrom = from;
 
             print("Bumped " + this.gameObject.name);
+
+            switch (player.faceDir)
+            {
+                case Player.FaceDir.Up:
+                    GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
+                    transform.Find("Attack").gameObject.SetActive(true);
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);
+                    isAfterAttack = true;
+
+                    StartCoroutine(WaitToMoveAfterAttack());
+                    break;
+                case Player.FaceDir.Down:
+                    GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+                    transform.Find("Attack").gameObject.SetActive(true);
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);
+                    isAfterAttack = true;
+
+                    StartCoroutine(WaitToMoveAfterAttack());
+                    break;
+                case Player.FaceDir.Left:
+                    GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
+                    transform.Find("Attack").gameObject.SetActive(true);
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);
+                    isAfterAttack = true;
+
+                    StartCoroutine(WaitToMoveAfterAttack());
+                    break;
+                case Player.FaceDir.Right:
+                    GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
+                    transform.Find("Attack").gameObject.SetActive(true);
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);
+                    isAfterAttack = true;
+
+                    StartCoroutine(WaitToMoveAfterAttack());
+                    break;
+            }
         }
 
         void Update()
@@ -192,14 +229,58 @@ namespace Heack
             {
                 //print("attacking");
 
+                switch (player.faceDir)
+                {
+                    case Player.FaceDir.Up:
+                        GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
+                        transform.Find("Attack").gameObject.SetActive(true);
+                        transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);
+                        isAfterAttack = true;
+
+                        StartCoroutine(WaitToMoveAfterAttack());
+                        break;
+                    case Player.FaceDir.Down:
+                        GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
+                        transform.Find("Attack").gameObject.SetActive(true);
+                        transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);
+                        isAfterAttack = true;
+
+                        StartCoroutine(WaitToMoveAfterAttack());
+                        break;
+                    case Player.FaceDir.Left:
+                        GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
+                        transform.Find("Attack").gameObject.SetActive(true);
+                        transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);
+                        isAfterAttack = true;
+
+                        StartCoroutine(WaitToMoveAfterAttack());
+                        break;
+                    case Player.FaceDir.Right:
+                        GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
+                        transform.Find("Attack").gameObject.SetActive(true);
+                        transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);
+                        isAfterAttack = true;
+
+                        StartCoroutine(WaitToMoveAfterAttack());
+                        break;
+                }
+
                 otherAttack.KnockedDown(direction, this.gameObject);
             }
             else if((status == Status.Attack && otherAttack.status == Status.Attack) || (status == Status.Defense && otherAttack.status == Status.Defense) )
             {
                 otherAttack.Bumped(direction, this.gameObject);
             }            
-        }        
+        }
 
+        IEnumerator WaitToMoveAfterAttack()
+        {
+            yield return new WaitForSeconds(1f);
+
+            isAfterAttack = false;
+
+            transform.Find("Attack").gameObject.SetActive(false);
+        }
     }
 
 }
