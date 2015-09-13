@@ -131,32 +131,28 @@ namespace Heack
                 case Player.FaceDir.Up:
                     GetComponent<Animator>().CrossFade("Run_Attack_Front_A", 0f);
                     transform.Find("Attack").gameObject.SetActive(true);
-                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);
-                    isAfterAttack = true;
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);                    
 
                     StartCoroutine(WaitToMoveAfterAttack());
                     break;
                 case Player.FaceDir.Down:
                     GetComponent<Animator>().CrossFade("Run_Attack_Back_A", 0f);
                     transform.Find("Attack").gameObject.SetActive(true);
-                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);
-                    isAfterAttack = true;
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Front_Back_A", 0f);                    
 
                     StartCoroutine(WaitToMoveAfterAttack());
                     break;
                 case Player.FaceDir.Left:
                     GetComponent<Animator>().CrossFade("Run_Attack_Left_A", 0f);
                     transform.Find("Attack").gameObject.SetActive(true);
-                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);
-                    isAfterAttack = true;
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);                    
 
                     StartCoroutine(WaitToMoveAfterAttack());
                     break;
                 case Player.FaceDir.Right:
                     GetComponent<Animator>().CrossFade("Run_Attack_Right_A", 0f);
                     transform.Find("Attack").gameObject.SetActive(true);
-                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);
-                    isAfterAttack = true;
+                    transform.Find("Attack").GetComponent<Animator>().CrossFade("Attack_Right_Left_A", 0f);                    
 
                     StartCoroutine(WaitToMoveAfterAttack());
                     break;
@@ -280,8 +276,10 @@ namespace Heack
             }            
         }
 
-        IEnumerator WaitToMoveAfterAttack()
+        public IEnumerator WaitToMoveAfterAttack()
         {
+            isAfterAttack = true;
+
             yield return new WaitForSeconds(1f);
 
             isAfterAttack = false;

@@ -327,7 +327,7 @@ namespace Heack
 
         void Stunned()
         {
-
+            playerAttack.WaitToMoveAfterAttack(); // HACK : this will result in player not being able to move for 1 second
         }
     }
 
