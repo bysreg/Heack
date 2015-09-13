@@ -90,28 +90,28 @@ this.patronus = this.patronus || {};
 
         players[0].on("click", function(event) {
 			var msg = {
-				"type": "stunt",
+				"type": "stunned",
 				"player": 1
 			};
 			conn.sendMessage(msg, 0);        	
         }, this);
         players[1].on("click", function(event) {
 			var msg = {
-				"type": "stunt",
+				"type": "stunned",
 				"player": 2
 			};
 			conn.sendMessage(msg, 0);        	
         }, this);
         players[2].on("click", function(event) {
 			var msg = {
-				"type": "stunt",
+				"type": "stunned",
 				"player": 3
 			};
 			conn.sendMessage(msg, 0);        	
         }, this);
         players[3].on("click", function(event) {
 			var msg = {
-				"type": "stunt",
+				"type": "stunned",
 				"player": 4
 			};
 			conn.sendMessage(msg, 0);        	
