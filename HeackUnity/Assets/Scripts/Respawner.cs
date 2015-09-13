@@ -7,7 +7,7 @@ namespace Heack
     {
 
         [SerializeField]
-        float maxSpawnTime;
+        public float maxSpawnTime;
 
         float curSpawnTime;
         bool isCounting;

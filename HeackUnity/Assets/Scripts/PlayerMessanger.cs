@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using BladeCast;
+using Heack;
 
 public class PlayerMessanger : MonoBehaviour {
 	
@@ -8,7 +9,14 @@ public class PlayerMessanger : MonoBehaviour {
 	
 	float delay = 0.2f;
 	float elapsedTime = 0f;
-	
+
+    Respawner respawner;
+
+    void Awake()
+    {
+        respawner = GetComponent<Respawner>();
+    }
+
 	// Use this for initialization
 	void Start () {
 		
@@ -43,6 +51,11 @@ public class PlayerMessanger : MonoBehaviour {
 		BCMessenger.Instance.SendToListeners ("update_position", "pos", positions.ToString(), -1);
 	}
 	
+    public void SendDiedSignalToController()
+    {
+        BCMessenger.Instance.SendToListeners("died_signal", "spawn_time", respawner.maxSpawnTime, -1);
+    }
+
 	int ConvertPositionToByte(GameObject obj) {
 		int posX = (int) obj.transform.position.x;
 		int posY = (int) obj.transform.position.y;

@@ -24,6 +24,7 @@ namespace Heack
 
         PlayerAttack playerAttack;
         Respawner respawner;
+        PlayerMessanger playerMessanger;
  
         public enum FaceDir
         {
@@ -49,6 +50,7 @@ namespace Heack
             playerAttack = GetComponent<PlayerAttack>();
             animator = GetComponent<Animator>();
             respawner = GetComponent<Respawner>();
+            playerMessanger = GetComponent<PlayerMessanger>();
         }
 
         void Start()
@@ -107,6 +109,7 @@ namespace Heack
                 ScoreManager.Instance.IncScore(playerAttack.lastHitFrom.GetComponent<Player>().index);
             }
 
+            playerMessanger.SendDiedSignalToController();
             respawner.StartCountDown();
         }
 
