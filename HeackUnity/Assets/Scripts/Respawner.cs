@@ -28,6 +28,9 @@ namespace Heack
         SpriteRenderer renderer;
         Animator animator;
 
+        [SerializeField]
+        PlayerMessanger playerMessanger;
+
         void Awake()
         {
             player = GetComponent<Player>();
@@ -111,6 +114,8 @@ namespace Heack
             flipTime = 0;
             animator.CrossFade("Run_Front_A", 0);
             player.transform.position = spawnPoint;
+
+            playerMessanger.SendSpawnSignalToController(player.index);
         }        
     }
 

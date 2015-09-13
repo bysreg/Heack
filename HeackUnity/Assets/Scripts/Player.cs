@@ -49,6 +49,7 @@ namespace Heack
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
             BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
+            BCMessenger.Instance.RegisterListener("stun", 0, this.gameObject, "HandleStun");
 
             playerAttack = GetComponent<PlayerAttack>();
             animator = GetComponent<Animator>();
@@ -309,6 +310,19 @@ namespace Heack
                 }
             }
         }        
+
+        void HandleStun(ControllerMessage msg)
+        {
+            if(msg.ControllerSource == index)
+            {
+                Stunned();   
+            }
+        }
+
+        void Stunned()
+        {
+
+        }
     }
 
 }

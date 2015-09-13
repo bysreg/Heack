@@ -283,6 +283,10 @@ Prefab:
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
+    - target: {fileID: 11492300, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: playerMessanger
+      value: 
+      objectReference: {fileID: 726251789}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
@@ -1204,6 +1208,10 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11431640, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: playerMessanger
+      value: 
+      objectReference: {fileID: 726251789}
+    - target: {fileID: 11492300, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
@@ -2926,6 +2934,10 @@ Prefab:
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
+    - target: {fileID: 11492300, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: playerMessanger
+      value: 
+      objectReference: {fileID: 726251789}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 0}
@@ -3287,6 +3299,10 @@ Prefab:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11431640, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: playerMessanger
+      value: 
+      objectReference: {fileID: 726251789}
+    - target: {fileID: 11492300, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
       propertyPath: playerMessanger
       value: 
       objectReference: {fileID: 726251789}
