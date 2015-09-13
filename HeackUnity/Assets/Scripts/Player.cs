@@ -21,6 +21,8 @@ namespace Heack
         Vector2 recentLRFB;
 
         bool isDied;
+
+        PlayerAttack playerAttack;
  
         public enum FaceDir
         {
@@ -35,7 +37,9 @@ namespace Heack
         void Awake()
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
-            BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");            
+            BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
+
+            playerAttack = GetComponent<PlayerAttack>();
         }
 
         void Start()
@@ -64,7 +68,7 @@ namespace Heack
 
         void Update()
         {
-            if(!isDied)
+            if(!isDied && !playerAttack.IsKnocked())
             {
                 MoveViaAccelero(recentLRFB);
                 MoveToward(direction); // for the accelerometer
