@@ -28,32 +28,32 @@ public class PlayerMessanger : MonoBehaviour {
 	void SendPositionToController() {
 		// change position to bytes
 		int positions = 0x0;
-		int[] pos = {
-			ConvertPositionToByte(players[0]),
-			ConvertPositionToByte(players[1]),
-			ConvertPositionToByte(players[2]),
-			ConvertPositionToByte(players[3])
+		int[] pos = new int[] {
+			ConvertPositionToByte (players [0]),
+			ConvertPositionToByte (players [1]),
+			ConvertPositionToByte (players [2]),
+			ConvertPositionToByte (players [3])
 		};
-		
-		positions |= pos [0] << 24;
-		positions |= pos [1] << 16;
-		positions |= pos [2] << 8;
-		positions |= pos [3];
 
-		Debug.Log ("send position message: " + positions);
-		BCMessenger.Instance.SendToListeners ("update_position", "pos", positions, -1);
+		positions |= (pos[0] << 24);
+		positions |= (pos[1] << 16);
+		positions |= (pos[2] << 8);
+		positions |= pos[3];
+
+		BCMessenger.Instance.SendToListeners ("update_position", "pos", positions.ToString(), -1);
 	}
 	
-	int ConvertPositionToByte(GameObject gameObject) {
-		int posX = Mathf.RoundToInt(gameObject.transform.position.x);
-		int posY = Mathf.RoundToInt(gameObject.transform.position.y);
+	int ConvertPositionToByte(GameObject obj) {
+		int posX = (int) obj.transform.position.x;
+		int posY = (int) obj.transform.position.y;
+
 		posX = InsideBound (-1, 14, posX) + 1;
 		posY = InsideBound (-1, 10, posY) + 1;
-		
+
 		int result = 0x0;
-		result |= posX << 4;
-		result |= posY;
-		
+		result |= ((byte)posX) << 4;
+		result |= (byte)posY;
+
 		return result;
 	}
 	
