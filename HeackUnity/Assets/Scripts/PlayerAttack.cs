@@ -63,7 +63,8 @@ namespace Heack
             switch (status)
             {
                 case Status.Attack:
-                    GetComponent<SpriteRenderer>().color = Color.red;
+                    //GetComponent<SpriteRenderer>().color = Color.red;
+                    GetComponent<Transform>().Find("Hunt").gameObject.SetActive(true); //activate the hunt effect animation
                     break;
                 case Status.Defense:
                     // TODO : 
