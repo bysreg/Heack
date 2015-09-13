@@ -5,6 +5,7 @@ var sceneManager = null;
 var playerPositions = null;
 var editorTotalTime = 30000;
 var isGoToEditor = false;
+var isSpawnSignal = false;
 
 function init() {
 	canvas = document.getElementById('application-canvas');
