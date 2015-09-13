@@ -87,8 +87,11 @@ namespace Heack
             {
                 MoveViaAccelero(recentLRFB);
                 MoveToward(direction); // for the accelerometer
-                MoveViaKeyboard();
-                MoveToward(direction); // for the keyboard
+                if(index == 1 || index == 2)
+                {
+                    MoveViaKeyboard();
+                    MoveToward(direction); // for the keyboard
+                }                
             }            
 
             //check if this player is out of bounds
@@ -198,6 +201,16 @@ namespace Heack
                         direction.y = 0;
                         direction.x = 0;
                     }
+                }
+                else if(index==3)
+                {
+                    //direction.y = 0;
+                    //direction.x = 0;
+                }
+                else if(index==4)
+                {
+                    //direction.y = 0;
+                    //direction.x = 0;
                 }
             }
         }
