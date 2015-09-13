@@ -82,6 +82,7 @@ namespace Heack
         void Died()
         {
             this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
+            this.gameObject.GetComponent<Transform>().Find("Hunt").gameObject.SetActive(false);
             isDied = true;
         }
 
