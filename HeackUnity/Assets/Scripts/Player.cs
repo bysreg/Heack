@@ -2,6 +2,7 @@
 using System.Collections;
 using BladeCast;
 using System.Collections.Generic;
+using System;
 
 namespace Heack
 {
@@ -86,14 +87,23 @@ namespace Heack
             {
                 MoveViaAccelero(recentLRFB);
                 MoveToward(direction); // for the accelerometer
-                MoveViaKeyboard();
-                MoveToward(direction); // for the keyboard
+                if(index == 1 || index == 2)
+                {
+                    MoveViaKeyboard();
+                    MoveToward(direction); // for the keyboard
+                }                
             }            
 
             //check if this player is out of bounds
             if (CheckOutOfBounds() && !isDied)
             {
                 Died();                
+            }
+
+            //test
+            if(index==1 && Input.GetKeyDown(KeyCode.T))
+            {
+                Stunned();
             }
         }
 
@@ -191,6 +201,16 @@ namespace Heack
                         direction.y = 0;
                         direction.x = 0;
                     }
+                }
+                else if(index==3)
+                {
+                    //direction.y = 0;
+                    //direction.x = 0;
+                }
+                else if(index==4)
+                {
+                    //direction.y = 0;
+                    //direction.x = 0;
                 }
             }
         }
@@ -319,18 +339,22 @@ namespace Heack
 
         void HandleStun(ControllerMessage msg)
         {
-            if(msg.ControllerSource == index)
-            {
-                Stunned();   
+            string val_raw = msg.Payload.GetField("player").ToString();           
+            print("stun : " + val_raw);          
+            if(val_raw == index + "")
+            {               
+                Stunned();                
             }
         }
 
         void Stunned()
-        {
-            GameObject.Find("Tile_Effect").transform.Find("Thunder_Up").gameObject.GetComponent<Animator>().Play("Thunder_Up", 0f); //play thunder animation
-            GameObject.Find("Tile_Effect").transform.Find("Thunder_Down").gameObject.GetComponent<Animator>().Play("Thunder_Down", 0f); //play thunder animation
-
-            GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation
+        {            
+            Transform thunder = GameObject.Find("Tile_Effect").transform.Find("Thunder");
+            Animator thunderAnimator = thunder.GetChild(0).GetComponent<Animator>();            
+            thunderAnimator.Play("Thunder"); //play thunder animation            
+            thunder.position = transform.position + new Vector3(0, -1.5f, 0);            
+            
+            GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation            
 
             playerAttack.WaitToMoveAfterAttack(); // HACK : this will result in player not being able to move for 1 second
         }
