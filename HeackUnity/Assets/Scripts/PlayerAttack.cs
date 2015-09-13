@@ -30,6 +30,11 @@ namespace Heack
         [SerializeField]
         float knockMaxTime = 0.3f;
 
+        [SerializeField]
+        float bumpMaxMagnitude = 10;
+        [SerializeField]
+        float bumpMaxTime = 0.15f;
+
         void Awake()
         {
             RandomizeStatus();
@@ -79,12 +84,19 @@ namespace Heack
             knockTime = knockMaxTime;
         }
 
+        void Bumped(Vector2 direction, GameObject from)
+        {
+            isKnocked = true;
+            knockDirection = direction;
+            KnockMagnitude = bumpMaxMagnitude;
+            knockTime = bumpMaxTime;
+        }
+
         void Update()
         {
             if(isKnocked)
             {
-                transform.position += knockDirection * Time.deltaTime * KnockMagnitude;
-                //KnockMagnitude -= Time.deltaTime;
+                transform.position += knockDirection * Time.deltaTime * KnockMagnitude;                
                 knockTime -= Time.deltaTime;
                 if(knockTime < 0)
                 {
@@ -96,30 +108,38 @@ namespace Heack
         void OnTriggerEnter2D(Collider2D collider)
         {
             PlayerAttack otherAttack = collider.gameObject.GetComponent<PlayerAttack>();
-            if (otherAttack != null && status == Status.Attack && otherAttack.status == Status.Defense)
+
+            if (otherAttack == null)
+                return;
+
+            Vector2 direction = new Vector2();
+
+            switch (player.faceDir)
             {
-                print("attacking");
-
-                Vector2 direction = new Vector2();
-
-                switch (player.faceDir)
-                {
-                    case Player.FaceDir.Up:
-                        direction.y = 1;
-                        break;
-                    case Player.FaceDir.Down:
-                        direction.y = -1;
-                        break;
-                    case Player.FaceDir.Left:
-                        direction.x = -1;
-                        break;
-                    case Player.FaceDir.Right:
-                        direction.x = 1;
-                        break;
-                }
-
-                otherAttack.KnockedDown(direction, otherAttack.gameObject);
+                case Player.FaceDir.Up:
+                    direction.y = 1;
+                    break;
+                case Player.FaceDir.Down:
+                    direction.y = -1;
+                    break;
+                case Player.FaceDir.Left:
+                    direction.x = -1;
+                    break;
+                case Player.FaceDir.Right:
+                    direction.x = 1;
+                    break;
             }
+
+            if (status == Status.Attack && otherAttack.status == Status.Defense)
+            {
+                //print("attacking");
+
+                otherAttack.KnockedDown(direction, this.gameObject);
+            }
+            else if((status == Status.Attack && otherAttack.status == Status.Attack) || (status == Status.Defense && otherAttack.status == Status.Defense) )
+            {
+                otherAttack.Bumped(direction, this.gameObject);
+            }            
         }        
 
     }
