@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using BladeCast;
+using Heack;
 
 public class PlayerMessanger : MonoBehaviour {
 	
-	public GameObject[] players;
+	public Player[] players;
 	
 	float delay = 0.2f;
 	float elapsedTime = 0f;
-	
+
 	// Use this for initialization
 	void Start () {
 		
@@ -29,10 +30,10 @@ public class PlayerMessanger : MonoBehaviour {
 		// change position to bytes
 		int positions = 0x0;
 		int[] pos = new int[] {
-			ConvertPositionToByte (players [0]),
-			ConvertPositionToByte (players [1]),
-			ConvertPositionToByte (players [2]),
-			ConvertPositionToByte (players [3])
+			ConvertPositionToByte (players [0].gameObject),
+			ConvertPositionToByte (players [1].gameObject),
+			ConvertPositionToByte (players [2].gameObject),
+			ConvertPositionToByte (players [3].gameObject)
 		};
 
 		positions |= (pos[0] << 24);
@@ -43,6 +44,11 @@ public class PlayerMessanger : MonoBehaviour {
 		BCMessenger.Instance.SendToListeners ("update_position", "pos", positions.ToString(), -1);
 	}
 	
+    public void SendDiedSignalToController(int playerIndex)
+    {
+        BCMessenger.Instance.SendToListeners("died_signal", "spawn_time", players[playerIndex].respawner.maxSpawnTime, -1);
+    }
+
 	int ConvertPositionToByte(GameObject obj) {
 		int posX = (int) obj.transform.position.x;
 		int posY = (int) obj.transform.position.y;

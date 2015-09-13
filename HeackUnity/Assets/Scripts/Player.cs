@@ -16,6 +16,8 @@ namespace Heack
 
         [SerializeField]
         float acceleroThreshold;
+        
+        public float spawnOffset;
 
         Vector3 direction;
         Vector2 recentLRFB;
@@ -23,6 +25,9 @@ namespace Heack
         bool isDied;
 
         PlayerAttack playerAttack;
+        public Respawner respawner;
+        [SerializeField]
+        PlayerMessanger playerMessanger;
  
         public enum FaceDir
         {
@@ -34,12 +39,20 @@ namespace Heack
 
         public FaceDir faceDir;
 
+        Animator animator;
+        [SerializeField]
+        Collider2D collider;
+        [SerializeField]
+        Collider2D trigger;
+
         void Awake()
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
             BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
 
             playerAttack = GetComponent<PlayerAttack>();
+            animator = GetComponent<Animator>();
+            respawner = GetComponent<Respawner>();            
         }
 
         void Start()
@@ -50,16 +63,16 @@ namespace Heack
             switch (index)
             {
                 case 1:
-                    tilePos.x = 0; tilePos.y = 0;
+                    tilePos.x = 0  + spawnOffset; tilePos.y = 0  + spawnOffset;
                     break;
                 case 2:
-                    tilePos.x = GridArena.Instance.Width - 1; tilePos.y = 0;
+                    tilePos.x = GridArena.Instance.Width - 1 - spawnOffset; tilePos.y = 0  +spawnOffset;
                     break;
                 case 3:
-                    tilePos.x = GridArena.Instance.Width - 1; tilePos.y = GridArena.Instance.Height - 1;
+                    tilePos.x = GridArena.Instance.Width - 1 - spawnOffset; tilePos.y = GridArena.Instance.Height - 1  - spawnOffset;
                     break;
                 case 4:
-                    tilePos.x = 0; tilePos.y = GridArena.Instance.Height - 1;
+                    tilePos.x = 0  +spawnOffset; tilePos.y = GridArena.Instance.Height - 1 - spawnOffset;
                     break;
             }
 
@@ -85,14 +98,31 @@ namespace Heack
 
         void Died()
         {
-            this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
-            this.gameObject.GetComponent<Transform>().Find("Hunt").gameObject.SetActive(false);
+            this.animator.CrossFade("Fell_A", 0f);
+            this.transform.Find("Hunt").gameObject.SetActive(false);
             isDied = true;
+
+            //disable collider and trigger, so that it cant be interacted physically
+            collider.enabled = false;
+            trigger.enabled = false;
 
             if (playerAttack.lastHitFrom != null)
             {                
                 ScoreManager.Instance.IncScore(playerAttack.lastHitFrom.GetComponent<Player>().index);
             }
+
+            playerMessanger.SendDiedSignalToController(index);
+            respawner.StartCountDown();
+        }
+
+        public void Reset()
+        {
+            animator.CrossFade("Run_Front_A", 0);
+            isDied = false;
+            collider.enabled = true;
+            trigger.enabled = true;
+
+            playerAttack.Reset();
         }
 
         public bool IsDied()

@@ -11,7 +11,7 @@ $(document).ready(function () {
 		var payload = message.payload;
 		switch (payload.type) {
 			case "update_position":
-				playerPositions = payload.pos;
+				playerPositions = parseInt(payload.pos);
 				break;
 		}
 	});
