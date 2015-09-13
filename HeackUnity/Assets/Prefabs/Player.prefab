@@ -108,6 +108,8 @@ MonoBehaviour:
   index: 0
   speed: 6
   acceleroThreshold: .100000001
+  spawnOffset: 1
+  playerMessanger: {fileID: 0}
   faceDir: 0
   collider: {fileID: 5812452}
   trigger: {fileID: 5894520}
@@ -252,6 +254,10 @@ Prefab:
       propertyPath: trigger
       value: 
       objectReference: {fileID: 5894520}
+    - target: {fileID: 0}
+      propertyPath: spawnOffset
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 173336}

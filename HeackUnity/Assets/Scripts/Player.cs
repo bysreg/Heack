@@ -16,6 +16,8 @@ namespace Heack
 
         [SerializeField]
         float acceleroThreshold;
+        
+        public float spawnOffset;
 
         Vector3 direction;
         Vector2 recentLRFB;
@@ -23,7 +25,8 @@ namespace Heack
         bool isDied;
 
         PlayerAttack playerAttack;
-        Respawner respawner;
+        public Respawner respawner;
+        [SerializeField]
         PlayerMessanger playerMessanger;
  
         public enum FaceDir
@@ -49,8 +52,7 @@ namespace Heack
 
             playerAttack = GetComponent<PlayerAttack>();
             animator = GetComponent<Animator>();
-            respawner = GetComponent<Respawner>();
-            playerMessanger = GetComponent<PlayerMessanger>();
+            respawner = GetComponent<Respawner>();            
         }
 
         void Start()
@@ -61,16 +63,16 @@ namespace Heack
             switch (index)
             {
                 case 1:
-                    tilePos.x = 0; tilePos.y = 0;
+                    tilePos.x = 0  + spawnOffset; tilePos.y = 0  + spawnOffset;
                     break;
                 case 2:
-                    tilePos.x = GridArena.Instance.Width - 1; tilePos.y = 0;
+                    tilePos.x = GridArena.Instance.Width - 1 - spawnOffset; tilePos.y = 0  +spawnOffset;
                     break;
                 case 3:
-                    tilePos.x = GridArena.Instance.Width - 1; tilePos.y = GridArena.Instance.Height - 1;
+                    tilePos.x = GridArena.Instance.Width - 1 - spawnOffset; tilePos.y = GridArena.Instance.Height - 1  - spawnOffset;
                     break;
                 case 4:
-                    tilePos.x = 0; tilePos.y = GridArena.Instance.Height - 1;
+                    tilePos.x = 0  +spawnOffset; tilePos.y = GridArena.Instance.Height - 1 - spawnOffset;
                     break;
             }
 
@@ -109,7 +111,7 @@ namespace Heack
                 ScoreManager.Instance.IncScore(playerAttack.lastHitFrom.GetComponent<Player>().index);
             }
 
-            playerMessanger.SendDiedSignalToController();
+            playerMessanger.SendDiedSignalToController(index);
             respawner.StartCountDown();
         }
 

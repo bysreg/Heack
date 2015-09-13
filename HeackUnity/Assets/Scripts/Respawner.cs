@@ -41,20 +41,20 @@ namespace Heack
             switch (player.index)
             {
                 case 1:
-                    spawnPoint.x = 0;
-                    spawnPoint.y = 0;
+                    spawnPoint.x = 0 + player.spawnOffset;
+                    spawnPoint.y = 0 + player.spawnOffset;
                     break;
                 case 2:
-                    spawnPoint.x = GridArena.Instance.Width - 1;
-                    spawnPoint.y = 0;
+                    spawnPoint.x = GridArena.Instance.Width - 1 - player.spawnOffset;
+                    spawnPoint.y = 0 + player.spawnOffset;
                     break;
                 case 3:
-                    spawnPoint.x = GridArena.Instance.Width - 1;
-                    spawnPoint.y = GridArena.Instance.Height - 1;
+                    spawnPoint.x = GridArena.Instance.Width - 1 - player.spawnOffset;
+                    spawnPoint.y = GridArena.Instance.Height - 1 - player.spawnOffset;
                     break;
                 case 4:
-                    spawnPoint.x = 0;
-                    spawnPoint.y = GridArena.Instance.Height - 1;
+                    spawnPoint.x = 0 + player.spawnOffset;
+                    spawnPoint.y = GridArena.Instance.Height - 1 - player.spawnOffset;
                     break;
             }
         }
