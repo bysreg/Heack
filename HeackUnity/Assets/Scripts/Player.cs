@@ -18,7 +18,9 @@ namespace Heack
         float acceleroThreshold;
 
         Vector3 direction;
-        Vector2 recentLRFB;           
+        Vector2 recentLRFB;
+
+        bool isDied;
  
         public enum FaceDir
         {
@@ -62,51 +64,57 @@ namespace Heack
 
         void Update()
         {
-            MoveViaAccelero(recentLRFB);
-            MoveToward(direction); // for the accelerometer
-            MoveViaKeyboard();
-            MoveToward(direction); // for the keyboard
+            if(!isDied)
+            {
+                MoveViaAccelero(recentLRFB);
+                MoveToward(direction); // for the accelerometer
+                MoveViaKeyboard();
+                MoveToward(direction); // for the keyboard
+            }            
 
             //check if this player is out of bounds
-            if (CheckOutOfBounds())
+            if (CheckOutOfBounds() && !isDied)
             {
-                print("dead");
+                Died();                
             }
+        }
+
+        void Died()
+        {
+            this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
+            isDied = true;
         }
 
         void MoveViaKeyboard()
         {
             //test
             if (index == 1)
-            {
-                if (!CheckOutOfBounds())
+            {                
+                if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    if (Input.GetKey(KeyCode.UpArrow))
-                    {
-                        direction.y = 1;
-                        direction.x = 0;
-                    }
-                    else if (Input.GetKey(KeyCode.LeftArrow))
-                    {
-                        direction.y = 0;
-                        direction.x = -1;
-                    }
-                    else if (Input.GetKey(KeyCode.RightArrow))
-                    {
-                        direction.y = 0;
-                        direction.x = 1;
-                    }
-                    else if (Input.GetKey(KeyCode.DownArrow))
-                    {
-                        direction.y = -1;
-                        direction.x = 0;
-                    }
-                    else
-                    {
-                        direction.y = 0;
-                        direction.x = 0;
-                    }
-                }                               
+                    direction.y = 1;
+                    direction.x = 0;
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    direction.y = 0;
+                    direction.x = -1;
+                }
+                else if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    direction.y = 0;
+                    direction.x = 1;
+                }
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    direction.y = -1;
+                    direction.x = 0;
+                }
+                else
+                {
+                    direction.y = 0;
+                    direction.x = 0;
+                }                                               
             }
             else if(index == 2)
             {
@@ -139,32 +147,29 @@ namespace Heack
         }
 
         void MoveToward(Vector3 direction)
-        {
-            if (!CheckOutOfBounds())
+        {            
+            if (direction.x == 0 && direction.y == 1)
             {
-                if (direction.x == 0 && direction.y == 1)
-                {
-                    faceDir = FaceDir.Up;
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
-                }
-                else if (direction.x == -1 && direction.y == 0)
-                {
-                    faceDir = FaceDir.Left;
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
-                }
-                else if (direction.x == 1 && direction.y == 0)
-                {
-                    faceDir = FaceDir.Right;
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
-                }
-                else if (direction.x == 0 && direction.y == -1)
-                {
-                    faceDir = FaceDir.Down;
-                    this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
-                }
-
-                transform.position += direction * Time.deltaTime * speed;
+                faceDir = FaceDir.Up;
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
             }
+            else if (direction.x == -1 && direction.y == 0)
+            {
+                faceDir = FaceDir.Left;
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
+            }
+            else if (direction.x == 1 && direction.y == 0)
+            {
+                faceDir = FaceDir.Right;
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
+            }
+            else if (direction.x == 0 && direction.y == -1)
+            {
+                faceDir = FaceDir.Down;
+                this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
+            }
+
+            transform.position += direction * Time.deltaTime * speed;            
         }
 
         void MoveToTile(Vector2 tilePos)
@@ -175,27 +180,19 @@ namespace Heack
         bool CheckOutOfBounds()
         {
             if (transform.position.x + 0.5f < GridArena.Instance.GetLeft())
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
-
+            {                
                 return true;
             }
             if (transform.position.x - 0.5f > GridArena.Instance.GetRight())
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
-
+            {                
                 return true;
             }
             if (transform.position.y + 0.5f < GridArena.Instance.GetDown())
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
-
+            {                
                 return true;
             }
             if (transform.position.y - 0.5f > GridArena.Instance.GetTop())
-            {
-                this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
-
+            {               
                 return true;
             }
 
