@@ -107,8 +107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   speed: 6
-  acceleroThreshold: .100000001
+  acceleroThreshold: 10
   spawnOffset: 1
+  respawner: {fileID: 0}
   playerMessanger: {fileID: 0}
   faceDir: 0
   collider: {fileID: 5812452}
@@ -127,6 +128,7 @@ MonoBehaviour:
   maxSpawnTime: 6
   maxBlinkTime: 2
   maxFlipTime: .200000003
+  playerMessanger: {fileID: 0}
 --- !u!114 &11499280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69769197d471f14f81f6c53d6f1b79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAfterAttack: 0
   status: 0
   knockMaxMagnitude: 7
   knockMaxTime: .300000012
@@ -187,7 +190,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 9955e772662e98745a232d4b06959cd5, type: 2}
     - target: {fileID: 0}
       propertyPath: acceleroThreshold
-      value: .100000001
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite

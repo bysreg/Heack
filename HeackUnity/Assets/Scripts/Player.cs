@@ -95,6 +95,12 @@ namespace Heack
             {
                 Died();                
             }
+
+            //test
+            if(index==1 && Input.GetKeyDown(KeyCode.T))
+            {
+                Stunned();
+            }
         }
 
         void Died()
@@ -327,9 +333,11 @@ namespace Heack
 
         void Stunned()
         {
-            GameObject.Find("Tile_Effect").transform.Find("Thunder").gameObject.GetComponent<Animator>().CrossFade("Thunder", 0f); //play thunder animation
+            Transform thunder = GameObject.Find("Tile_Effect").transform.Find("Thunder");
+            thunder.GetComponent<Animator>().CrossFade("Thunder", 0f); //play thunder animation
+            thunder.position = transform.position;
 
-            GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation
+            GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation            
 
             playerAttack.WaitToMoveAfterAttack(); // HACK : this will result in player not being able to move for 1 second
         }
