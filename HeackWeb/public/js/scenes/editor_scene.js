@@ -48,7 +48,6 @@ this.patronus = this.patronus || {};
 	        for (var i = 0; i < 4; i++) {
 	        	// get normal position from byte
 	        	var unityPos = this.convertByteToPos(posBytes[i]);
-	        	console.log(i + " (x: " + unityPos.x + ", y: " + unityPos.y + ") -> " + playerPositions);
 	        	// set player position
 	        	var realPos = this.convertUnityPosToCanvasPos(unityPos);
 	        	this.players[i].setPosition(realPos.x, realPos.y);
@@ -87,11 +86,24 @@ this.patronus = this.patronus || {};
     }
 
 	p.generateTimer = function() {
+		var _this = this;
+
+		// timer bar
 		var timer = new patronus.Bitmap('img/timer_bar.png');
 		timer.image.onload = function() {
-			timer.setPosition(canvas.width/2 - timer.image.width/2, 40);
+			// position
+			var pos = {"x": canvas.width/2 - timer.image.width/2, "y": 60};
+
+			// set position timer
+			timer.setPosition(pos.x, pos.y);
+
+			// add background
+	        var bgTimer = new createjs.Shape();
+	        bgTimer.graphics.beginFill("#4b4b4b").drawRect(pos.x, pos.y, 751, 15);
+	
+	        _this.addChild(bgTimer);
+			_this.addChild(timer);
 		}
-		this.addChild(timer);
 
 		return timer;
 	}

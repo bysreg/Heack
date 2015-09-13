@@ -1,13 +1,13 @@
 html {
 	height: 100%;
-	background-color: #1d292c;
+	background-color: #70f0c0;
 }
 body {
 	margin: 0;
 	max-height: 100%;
 	height: 100%;
 	overflow: hidden;
-	background-color: #1d292c;
+	background-color: #70f0c0;
 	font-family: Helvetica, arial, sans-serif;
 	position: relative;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 canvas {
-	background: #ffffff;
+	background: #70f0c0;
 }
 
 #application-canvas {
