@@ -179,19 +179,19 @@ namespace Heack
 
         bool CheckOutOfBounds()
         {
-            if (transform.position.x + 0.5f < GridArena.Instance.GetLeft())
+            if (transform.position.x + 0.1f < GridArena.Instance.GetLeft())
             {                
                 return true;
             }
-            if (transform.position.x - 0.5f > GridArena.Instance.GetRight())
+            if (transform.position.x - 0.1f > GridArena.Instance.GetRight())
             {                
                 return true;
             }
-            if (transform.position.y + 0.5f < GridArena.Instance.GetDown())
+            if (transform.position.y + 0.1f < GridArena.Instance.GetDown())
             {                
                 return true;
             }
-            if (transform.position.y - 0.5f > GridArena.Instance.GetTop())
+            if (transform.position.y - 0.2f > GridArena.Instance.GetTop())
             {               
                 return true;
             }
