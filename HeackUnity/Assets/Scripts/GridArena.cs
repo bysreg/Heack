@@ -65,11 +65,51 @@ namespace Heack
 
         void InitGrids(int width, int height)
         {
-            for(int i=0;i<height;i++)
+            CreateTile(0, 0, 0);
+            CreateTile(width - 1, 0, 1);
+            CreateTile(0, height - 1, 9);
+            CreateTile(width - 1, height - 1, 10);
+
+            for (int i = 1; i < height-1; i++) //create for left corner of the screen
             {
-                for(int j=0;j<width;j++)
+                CreateTile(0, i, 6);
+            }
+
+            for (int i = 1; i < height - 1; i++) //create for right corner of the screen
+            {
+                CreateTile(width - 1, i, 7);
+            }
+
+            for (int i = 1; i < width - 1; i++) //create for bottom corner of the screen
+            {
+                CreateTile(i, 0, 5);
+            }
+
+            for (int i = 1; i < width - 1; i++) //create for up corner of the screen
+            {
+                CreateTile(i, height - 1, 8);
+            }
+
+            for (int i=1;i<height-1;i++)
+            {
+                for(int j=1;j<width-1;j++)
                 {
-                    CreateTile(j, i, 0);
+                    int randomID = Random.Range(1, 10);
+
+                    if (randomID >= 1 && randomID < 5)
+                    {
+                        CreateTile(j, i, 2);
+                    }
+                    else
+                    if (randomID >= 5 && randomID < 9)
+                    {
+                        CreateTile(j, i, 3);
+                    }
+                    else
+                    if (randomID >= 9)
+                    {
+                        CreateTile(j, i, 4);
+                    }
                 }
             }
         }
@@ -77,7 +117,7 @@ namespace Heack
         void CreateTile(int x, int y, int type)
         {
             Transform tilePrefab = tilePrefabs[type];
-            Transform t = GameObject.Instantiate(tilePrefabs[type], new Vector3(x, y, 0), Quaternion.identity) as Transform;
+            Transform t = GameObject.Instantiate(tilePrefabs[type], new Vector3(x, y - 0.25f, 0), Quaternion.identity) as Transform;
             t.name = tilePrefab.name + (y * height + x);
             t.parent = tilesLayer.transform;
             tilesArr[y, x] = t;

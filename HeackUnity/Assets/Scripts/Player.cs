@@ -194,25 +194,25 @@ namespace Heack
 
         bool CheckOutOfBounds()
         {
-            if (transform.position.x + 0.5f < GridArena.Instance.GetLeft())
+            if (transform.position.x + 0.1f < GridArena.Instance.GetLeft())
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
 
                 return true;
             }
-            if (transform.position.x - 0.5f > GridArena.Instance.GetRight())
+            if (transform.position.x - 0.1f > GridArena.Instance.GetRight())
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
 
                 return true;
             }
-            if (transform.position.y + 0.5f < GridArena.Instance.GetDown())
+            if (transform.position.y + 0.1f < GridArena.Instance.GetDown())
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
 
                 return true;
             }
-            if (transform.position.y - 0.5f > GridArena.Instance.GetTop())
+            if (transform.position.y - 0.2f > GridArena.Instance.GetTop())
             {
                 this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
 
