@@ -95,6 +95,11 @@ namespace Heack
             }
         }
 
+        public bool IsDied()
+        {
+            return isDied;
+        }
+
         void MoveViaKeyboard()
         {
             //test

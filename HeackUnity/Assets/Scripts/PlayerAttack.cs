@@ -7,13 +7,13 @@ namespace Heack
     public class PlayerAttack : MonoBehaviour
     {
 
-        enum Status
+        public enum Status
         {
             Attack,
             Defense,
         }    
 
-        Status status;
+        public Status status;
         static List<Status> statusList;
 
         Rigidbody2D rigidBody2D;
@@ -41,9 +41,9 @@ namespace Heack
 
         void Awake()
         {
-            RandomizeStatus();
             rigidBody2D = GetComponent<Rigidbody2D>();
             player = GetComponent<Player>();
+            RandomizeStatus();
         }
 
         void RandomizeStatus()
@@ -69,16 +69,7 @@ namespace Heack
             status = statusList[random];
             statusList.RemoveAt(random);
             //print(index + " " + status);
-            switch (status)
-            {
-                case Status.Attack:
-                    //GetComponent<SpriteRenderer>().color = Color.red;
-                    GetComponent<Transform>().Find("Hunt").gameObject.SetActive(true); //activate the hunt effect animation
-                    break;
-                case Status.Defense:
-                    // TODO : 
-                    break;
-            }
+            SetStatus(status);
         }
 
         public bool IsKnocked()
@@ -148,6 +139,27 @@ namespace Heack
                 {
                     lastHitFrom = null;
                 }
+            }
+        }
+
+        public void SetStatus(Status status)
+        {
+            this.status = status;
+
+            if(player.IsDied())
+            {
+                return;
+            }
+
+            switch (status)
+            {
+                case Status.Attack:
+                    //GetComponent<SpriteRenderer>().color = Color.red;
+                    GetComponent<Transform>().Find("Hunt").gameObject.SetActive(true); //activate the hunt effect animation
+                    break;
+                case Status.Defense:                    
+                    GetComponent<Transform>().Find("Hunt").gameObject.SetActive(false); //deactivate the hunt effect animation
+                    break;
             }
         }
 

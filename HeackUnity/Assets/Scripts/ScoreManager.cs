@@ -6,7 +6,6 @@ namespace Heack
 {
     public class ScoreManager : Common.Singleton<ScoreManager>
     {
-
         [SerializeField]
         Text[] scoresText;
 
