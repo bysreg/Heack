@@ -22,6 +22,11 @@ namespace Heack
             scores[playerIndex-1]++;
             scoresText[playerIndex-1].text = "" + scores[playerIndex-1];
         }
+
+        public int GetPlayerScore(int playerIndex)
+        {
+            return scores[playerIndex - 1];
+        }
     }
 }
 
