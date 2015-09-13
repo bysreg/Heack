@@ -14,9 +14,12 @@ $(document).ready(function () {
 				playerPositions = parseInt(payload.pos);
 				break;
 			case "died_signal":
-				editorTotalTime = payload.spawn_time;
+				editorTotalTime = payload.spawn_time * 1000;
 				isGoToEditor = true;
 				break;
+			case "spawn_signal":
+				isSpawnSignal = true;
+			 	break;
 		}
 	});
 });
