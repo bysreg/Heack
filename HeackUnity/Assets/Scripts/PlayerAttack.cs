@@ -35,6 +35,10 @@ namespace Heack
         [SerializeField]
         float bumpMaxTime = 0.15f;
 
+        public GameObject lastHitFrom; // record who lands the last hit on this player, will reset back to null if lastHitExpireTime hits zero
+        float lastHitExpireTime;
+        float HIT_EXPIRE_TIME = 2f;
+
         void Awake()
         {
             RandomizeStatus();
@@ -88,6 +92,7 @@ namespace Heack
             knockDirection = direction;
             KnockMagnitude = knockMaxMagnitude;
             knockTime = knockMaxTime;
+            lastHitFrom = from;
 
             print("Knocked " + this.gameObject.name);
 
@@ -118,6 +123,7 @@ namespace Heack
             knockDirection = direction;
             KnockMagnitude = bumpMaxMagnitude;
             knockTime = bumpMaxTime;
+            lastHitFrom = from;
 
             print("Bumped " + this.gameObject.name);
         }
@@ -131,6 +137,16 @@ namespace Heack
                 if(knockTime < 0)
                 {
                     isKnocked = false;
+                }
+            }
+
+            if (lastHitExpireTime > 0)
+            {
+                lastHitExpireTime -= Time.deltaTime;
+
+                if (lastHitExpireTime <= 0)
+                {
+                    lastHitFrom = null;
                 }
             }
         }

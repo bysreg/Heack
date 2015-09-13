@@ -88,6 +88,11 @@ namespace Heack
             this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
             this.gameObject.GetComponent<Transform>().Find("Hunt").gameObject.SetActive(false);
             isDied = true;
+
+            if (playerAttack.lastHitFrom != null)
+            {                
+                ScoreManager.Instance.IncScore(playerAttack.lastHitFrom.GetComponent<Player>().index);
+            }
         }
 
         void MoveViaKeyboard()
