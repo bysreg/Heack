@@ -1,7 +1,8 @@
-var image = {};
 var canvas = null;
 var stage = null;
 var sceneManager = null;
+
+var playerPositions = null;
 
 function init() {
 	canvas = document.getElementById('application-canvas');
