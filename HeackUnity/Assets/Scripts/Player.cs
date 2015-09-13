@@ -325,10 +325,16 @@ namespace Heack
 
         void HandleStun(ControllerMessage msg)
         {
-            if(msg.ControllerSource == index)
+            string val_raw = msg.Payload.GetField("player").ToString();
+            int val_parsed;
+            if (int.TryParse(val_raw, out val_parsed))
             {
-                Stunned();   
-            }
+                //print("LR : (" + msg.ControllerSource + ") " + val_parsed);
+                if (msg.ControllerSource == val_parsed)
+                {
+                    Stunned();   
+                }
+            }            
         }
 
         void Stunned()
