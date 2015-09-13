@@ -269,7 +269,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 480590, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 173336, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
       propertyPath: m_Name
@@ -3250,7 +3250,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 480590, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 173336, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
       propertyPath: m_Name

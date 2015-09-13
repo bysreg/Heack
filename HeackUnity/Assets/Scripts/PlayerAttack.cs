@@ -46,6 +46,13 @@ namespace Heack
             RandomizeStatus();
         }
 
+        public void Reset()
+        {
+            isKnocked = false;
+            lastHitFrom = null;
+            lastHitExpireTime = 0;
+        }
+
         void RandomizeStatus()
         {
             if (statusList == null)
@@ -85,7 +92,7 @@ namespace Heack
             knockTime = knockMaxTime;
             lastHitFrom = from;
 
-            print("Knocked " + this.gameObject.name);
+            //print("Knocked " + this.gameObject.name);
 
             if (direction.x == -1) //if bumped to the left
             {

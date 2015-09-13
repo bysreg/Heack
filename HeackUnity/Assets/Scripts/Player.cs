@@ -23,6 +23,7 @@ namespace Heack
         bool isDied;
 
         PlayerAttack playerAttack;
+        Respawner respawner;
  
         public enum FaceDir
         {
@@ -34,12 +35,20 @@ namespace Heack
 
         public FaceDir faceDir;
 
+        Animator animator;
+        [SerializeField]
+        Collider2D collider;
+        [SerializeField]
+        Collider2D trigger;
+
         void Awake()
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
             BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
 
             playerAttack = GetComponent<PlayerAttack>();
+            animator = GetComponent<Animator>();
+            respawner = GetComponent<Respawner>();
         }
 
         void Start()
@@ -85,14 +94,30 @@ namespace Heack
 
         void Died()
         {
-            this.gameObject.GetComponent<Animator>().CrossFade("Fell_A", 0f);
-            this.gameObject.GetComponent<Transform>().Find("Hunt").gameObject.SetActive(false);
+            this.animator.CrossFade("Fell_A", 0f);
+            this.transform.Find("Hunt").gameObject.SetActive(false);
             isDied = true;
+
+            //disable collider and trigger, so that it cant be interacted physically
+            collider.enabled = false;
+            trigger.enabled = false;
 
             if (playerAttack.lastHitFrom != null)
             {                
                 ScoreManager.Instance.IncScore(playerAttack.lastHitFrom.GetComponent<Player>().index);
             }
+
+            respawner.StartCountDown();
+        }
+
+        public void Reset()
+        {
+            animator.CrossFade("Run_Front_A", 0);
+            isDied = false;
+            collider.enabled = true;
+            trigger.enabled = true;
+
+            playerAttack.Reset();
         }
 
         public bool IsDied()
@@ -166,22 +191,22 @@ namespace Heack
             if (direction.x == 0 && direction.y == 1)
             {
                 faceDir = FaceDir.Up;
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Back_A", 0f);
+                this.animator.CrossFade("Run_Back_A", 0f);
             }
             else if (direction.x == -1 && direction.y == 0)
             {
-                faceDir = FaceDir.Left;
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Left_A", 0f);
+                faceDir = FaceDir.Left;                
+                this.animator.CrossFade("Run_Left_A", 0f);
             }
             else if (direction.x == 1 && direction.y == 0)
             {
                 faceDir = FaceDir.Right;
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Right_A", 0f);
+                this.animator.CrossFade("Run_Right_A", 0f);
             }
             else if (direction.x == 0 && direction.y == -1)
             {
                 faceDir = FaceDir.Down;
-                this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
+                this.animator.CrossFade("Run_Front_A", 0f);
             }
 
             transform.position += direction * Time.deltaTime * speed;                        
