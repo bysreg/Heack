@@ -37,6 +37,14 @@ this.patronus = this.patronus || {};
     p._tick = function(evtObj) {
         this.GameScene__tick(evtObj);
 
+        // time is up
+        if (isSpawnSignal) {
+        	isSpawnSignal = false;
+
+        	// move to main scene
+			getSceneManager().replace(new patronus.main_scene());
+        }
+
         // update player position
         if (playerPositions != null) {
         	var posBytes = [];

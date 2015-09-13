@@ -17,6 +17,9 @@ $(document).ready(function () {
 				editorTotalTime = payload.spawn_time * 1000;
 				isGoToEditor = true;
 				break;
+			case "spawn_signal":
+				isSpawnSignal = true;
+			 	break;
 		}
 	});
 });
