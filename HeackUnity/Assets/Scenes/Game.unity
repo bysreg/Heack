@@ -948,6 +948,15 @@ Prefab:
       propertyPath: index
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 59497727e3a082e48bf131e819f51422,
+        type: 3}
+    - target: {fileID: 9570362, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
@@ -2225,7 +2234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8277016a9d2ccb64095f0a195320d024, type: 3}
+  m_Sprite: {fileID: 21300000, guid: add8edc7d1b338146951fb34146455f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1542592001 stripped
 Transform:

@@ -88,6 +88,28 @@ namespace Heack
             knockDirection = direction;
             KnockMagnitude = knockMaxMagnitude;
             knockTime = knockMaxTime;
+
+            print("Knocked " + this.gameObject.name);
+
+            if (direction.x == -1) //if bumped to the left
+            {
+                GetComponent<Animator>().CrossFade("Dragged_Left_A", 0f);
+            }
+            else
+            if (direction.x == 1) //if bumped to the right
+            {
+                GetComponent<Animator>().CrossFade("Dragged_Right_A", 0f);
+            }
+            else
+            if (direction.y == 1) //if bumped to the right
+            {
+                GetComponent<Animator>().CrossFade("Dragged_Front_A", 0f);
+            }
+            else
+            if (direction.y == -1) //if bumped to the right
+            {
+                GetComponent<Animator>().CrossFade("Dragged_Back_A", 0f);
+            }
         }
 
         void Bumped(Vector2 direction, GameObject from)
@@ -96,6 +118,8 @@ namespace Heack
             knockDirection = direction;
             KnockMagnitude = bumpMaxMagnitude;
             knockTime = bumpMaxTime;
+
+            print("Bumped " + this.gameObject.name);
         }
 
         void Update()
