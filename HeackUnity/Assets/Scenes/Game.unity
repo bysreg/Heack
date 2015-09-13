@@ -2687,7 +2687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07e6dc74e0a1924a8bb9f6e7e583af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 20
+  maxTime: 90
   timerText: {fileID: 2143968854}
   winnerText: {fileID: 1825034533}
   scoreManager: {fileID: 462756314}
