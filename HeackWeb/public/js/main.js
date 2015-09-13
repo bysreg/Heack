@@ -3,6 +3,7 @@ var stage = null;
 var sceneManager = null;
 
 var playerPositions = null;
+var editorTotalTime = 30000;
 
 function init() {
 	canvas = document.getElementById('application-canvas');
