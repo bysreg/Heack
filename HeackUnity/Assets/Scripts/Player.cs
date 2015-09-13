@@ -169,7 +169,7 @@ namespace Heack
                 this.gameObject.GetComponent<Animator>().CrossFade("Run_Front_A", 0f);
             }
 
-            transform.position += direction * Time.deltaTime * speed;            
+            transform.position += direction * Time.deltaTime * speed;                        
         }
 
         void MoveToTile(Vector2 tilePos)
