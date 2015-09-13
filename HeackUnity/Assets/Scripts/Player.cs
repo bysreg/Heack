@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using BladeCast;
+using System.Collections.Generic;
 
 namespace Heack
 {
@@ -25,12 +26,15 @@ namespace Heack
             Defense, 
         }
 
-        Status status;                
+        Status status;
+        static List<Status> statusList;
 
         void Awake()
         {
             BCMessenger.Instance.RegisterListener("tiltLR", 0, this.gameObject, "HandleTiltLR");
             BCMessenger.Instance.RegisterListener("tiltFB", 0, this.gameObject, "HandleTiltFB");
+
+            RandomizeStatus();
         }
 
         void Start()
@@ -55,6 +59,40 @@ namespace Heack
             }
 
             MoveToTile(tilePos);
+        }
+
+        void RandomizeStatus()
+        {
+            if(statusList == null)
+            {
+                statusList = new List<Status>();
+                statusList.Add(Status.Attack);
+                statusList.Add(Status.Attack);
+                statusList.Add(Status.Defense);
+                statusList.Add(Status.Defense);
+                //shuffle the list
+                for (int i = 0; i < statusList.Count;i++ )
+                {
+                    Status temp = statusList[i];
+                    int shuffleIndex = Random.Range(i, statusList.Count);
+                    statusList[i] = statusList[shuffleIndex];
+                    statusList[shuffleIndex] = temp;
+                }
+            }
+
+            int random = Random.Range(0, statusList.Count);
+            status = statusList[random];
+            statusList.RemoveAt(random);
+            //print(index + " " + status);
+            switch (status)
+            { 
+                case Status.Attack:
+                    GetComponent<SpriteRenderer>().color = Color.red;
+                    break;
+                case Status.Defense:
+                    // TODO : 
+                    break;
+            }
         }
 
         void Update()
