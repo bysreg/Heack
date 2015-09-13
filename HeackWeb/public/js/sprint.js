@@ -13,6 +13,10 @@ $(document).ready(function () {
 			case "update_position":
 				playerPositions = parseInt(payload.pos);
 				break;
+			case "died_signal":
+				editorTotalTime = payload.spawn_time;
+				isGoToEditor = true;
+				break;
 		}
 	});
 });

@@ -13,48 +13,35 @@ this.patronus = this.patronus || {};
 		this.GameScene_constructor();
 		
 		// ATTRIBUTES
-		var _this = this;
+		// background
+        var background = new createjs.Shape();
+        background.graphics.beginFill("#4b4b4b").drawRect(0, 0, canvas.width, canvas.height);
+        this.addChild(background);
 
-		// left button
-		this.leftBtn = new patronus.Button('img/arrow.png');
-		this.leftBtn.image.onload = function() {_this.leftBtn.setAnchorPoint(.5, .5);};
-		this.leftBtn.setPosition(canvas.width/2 - 450, canvas.height/2);
-		this.leftBtn.setRotation(180);
-        this.leftBtn.on("click", function(event) {
-        	var msg = {
-				"type": "move",
-				"dir": "left"
-			};
-	        conn.sendMessage(msg, 0);
-        }, this);
-		this.addChild(this.leftBtn);
-
-		// right button
-		this.rightBtn = new patronus.Button('img/arrow.png');
-		this.rightBtn.image.onload = function() {_this.rightBtn.setAnchorPoint(.5, .5);};
-		this.rightBtn.setPosition(canvas.width/2 + 450, canvas.height/2);
-        this.rightBtn.on("click", function(event) {
-        	var msg = {
-				"type": "move",
-				"dir": "right"
-			};
-	        conn.sendMessage(msg, 0);
-        }, this);
-		this.addChild(this.rightBtn);
-
-		this.generateCircle();
+		// face
+		var faceIdx = 1;
+		var face = new patronus.Bitmap('img/face_icon/player' + faceIdx + '.png');
+		face.image.onload = function() {
+			face.setAnchorPoint(.5, .5)
+			face.setPosition(canvas.width/2, canvas.height/2);
+			face.setScale(15);
+		}
+		this.addChild(face);
 	}
 	var p = createjs.extend(main_scene, patronus.GameScene);
 
 	// FUNCTION & PROCEDURES
-	p.generateCircle = function() {
-		var circle = new createjs.Shape();
-		circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-		circle.x = 100;
-		circle.y = 100;
+    // override function
+    p._tick = function(evtObj) {
+        this.GameScene__tick(evtObj);
 
-		this.addChild(circle);
-	}
+        // update player position
+        if (isGoToEditor) {
+        	isGoToEditor = false;
+        	// go to editor
+			getSceneManager().replace(new patronus.editor_scene());
+        }
+    }
 
 	patronus.main_scene = createjs.promote(main_scene, "GameScene");
 }());

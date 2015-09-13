@@ -46,7 +46,7 @@ public class PlayerMessanger : MonoBehaviour {
 	
     public void SendDiedSignalToController(int playerIndex)
     {
-        BCMessenger.Instance.SendToListeners("died_signal", "spawn_time", players[playerIndex].respawner.maxSpawnTime, -1);
+        BCMessenger.Instance.SendToListeners("died_signal", "spawn_time", players[playerIndex-1].respawner.maxSpawnTime, playerIndex);
     }
 
 	int ConvertPositionToByte(GameObject obj) {

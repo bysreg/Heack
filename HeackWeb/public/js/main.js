@@ -4,6 +4,7 @@ var sceneManager = null;
 
 var playerPositions = null;
 var editorTotalTime = 30000;
+var isGoToEditor = false;
 
 function init() {
 	canvas = document.getElementById('application-canvas');
@@ -14,7 +15,7 @@ function init() {
 	createjs.Ticker.addEventListener('tick', onTick);
 	
 	// first scene
-	sceneManager.push(new patronus.editor_scene());
+	sceneManager.push(new patronus.main_scene());
 
 	init_device_orientation();
 }
