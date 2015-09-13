@@ -13,6 +13,7 @@ GameObject:
   - 212: {fileID: 21230276}
   - 58: {fileID: 5812452}
   - 50: {fileID: 5034448}
+  - 114: {fileID: 11499280}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -92,6 +93,17 @@ MonoBehaviour:
   index: 0
   speed: 6
   acceleroThreshold: .100000001
+--- !u!114 &11499280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69769197d471f14f81f6c53d6f1b79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21230276
 SpriteRenderer:
   m_ObjectHideFlags: 1
