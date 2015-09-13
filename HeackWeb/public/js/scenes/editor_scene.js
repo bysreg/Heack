@@ -81,12 +81,41 @@ this.patronus = this.patronus || {};
     	var players = [];
 
     	for (var i = 0; i < 4; i++) {
-    		var player = new patronus.Bitmap('img/face_icon/player' + (i + 1) + '.png');
+    		var player = new patronus.Button('img/face_icon/player' + (i + 1) + '.png');
     		player.setScale(this.scale * 2);
     		this.addChild(player);
 
     		players.push(player);
     	}
+
+        players[0].on("click", function(event) {
+			var msg = {
+				"type": "stunt",
+				"player": 1
+			};
+			conn.sendMessage(msg, 0);        	
+        }, this);
+        players[1].on("click", function(event) {
+			var msg = {
+				"type": "stunt",
+				"player": 2
+			};
+			conn.sendMessage(msg, 0);        	
+        }, this);
+        players[2].on("click", function(event) {
+			var msg = {
+				"type": "stunt",
+				"player": 3
+			};
+			conn.sendMessage(msg, 0);        	
+        }, this);
+        players[3].on("click", function(event) {
+			var msg = {
+				"type": "stunt",
+				"player": 4
+			};
+			conn.sendMessage(msg, 0);        	
+        }, this);
 
     	return players;
     }
