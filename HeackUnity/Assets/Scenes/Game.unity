@@ -289,6 +289,18 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 07ed108e570960b43bbc3be51a27e529, type: 2}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Color.b
+      value: .397000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Color.g
+      value: .546999991
+      objectReference: {fileID: 0}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Color.r
+      value: .372000009
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
@@ -1434,6 +1446,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
