@@ -66,7 +66,7 @@ namespace Heack
         {
             if(isCounting)
             {
-                print("time to spawn : " + curSpawnTime);
+                //print("time to spawn : " + curSpawnTime);
                 curSpawnTime -= Time.deltaTime;
                 if (curSpawnTime <= 0)
                 {

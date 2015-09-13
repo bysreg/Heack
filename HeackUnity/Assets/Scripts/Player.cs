@@ -2,6 +2,7 @@
 using System.Collections;
 using BladeCast;
 using System.Collections.Generic;
+using System;
 
 namespace Heack
 {
@@ -325,24 +326,21 @@ namespace Heack
 
         void HandleStun(ControllerMessage msg)
         {
-            string val_raw = msg.Payload.GetField("player").ToString();
-            int val_parsed;
-            if (int.TryParse(val_raw, out val_parsed))
-            {
-                //print("LR : (" + msg.ControllerSource + ") " + val_parsed);
-                if (msg.ControllerSource == val_parsed)
-                {
-                    Stunned();   
-                }
-            }            
+            string val_raw = msg.Payload.GetField("player").ToString();           
+            print("stun : " + val_raw);          
+            if(val_raw == index + "")
+            {               
+                Stunned();                
+            }
         }
 
         void Stunned()
-        {
+        {            
             Transform thunder = GameObject.Find("Tile_Effect").transform.Find("Thunder");
-            thunder.GetComponent<Animator>().CrossFade("Thunder", 0f); //play thunder animation
-            thunder.position = transform.position;
-
+            Animator thunderAnimator = thunder.GetChild(0).GetComponent<Animator>();            
+            thunderAnimator.Play("Thunder"); //play thunder animation            
+            thunder.position = transform.position + new Vector3(0, -1.5f, 0);            
+            
             GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation            
 
             playerAttack.WaitToMoveAfterAttack(); // HACK : this will result in player not being able to move for 1 second
