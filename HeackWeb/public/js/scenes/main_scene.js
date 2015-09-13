@@ -39,7 +39,7 @@ this.patronus = this.patronus || {};
         if (isGoToEditor) {
         	isGoToEditor = false;
         	// go to editor
-			getSceneManager().replace(new patronus.editor_scene(), new creatine.transitions.FadeIn(null, transitionTime));
+			getSceneManager().replace(new patronus.editor_scene());
         }
     }
 
