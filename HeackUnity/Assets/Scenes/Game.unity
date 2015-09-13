@@ -1281,6 +1281,18 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 966d1638f24c43c4f8a8cc8531b8aeb1, type: 2}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Color.r
+      value: .948529422
+      objectReference: {fileID: 0}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Color.g
+      value: .0418468714
+      objectReference: {fileID: 0}
+    - target: {fileID: 21230276, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
+      propertyPath: m_Color.b
+      value: .0418468714
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f134a2263e129342b716bab5a95d57d, type: 2}
   m_IsPrefabParent: 0
