@@ -20,6 +20,9 @@ this.patronus = this.patronus || {};
 
 		// face
 		var faceIdx = 1;
+		if (conn != null) {
+			faceIdx = conn.index;			
+		}
 		var face = new patronus.Bitmap('img/face_icon/player' + faceIdx + '.png');
 		face.image.onload = function() {
 			face.setAnchorPoint(.5, .5)
