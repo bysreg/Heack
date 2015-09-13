@@ -76,6 +76,11 @@ namespace Heack
             //test
             if (index == 1)
             {
+                //if (Input.GetKeyDown(KeyCode.A))
+                //{
+                //    this.gameObject.GetComponent<Animator>().CrossFade("Stun_A", 0f);
+                //}
+
                 //if (Input.GetKeyDown(KeyCode.F))
                 //{                    
                 //    if (direction.y == 1 && direction.x == 0) //if face up
