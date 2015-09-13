@@ -327,7 +327,9 @@ namespace Heack
 
         void Stunned()
         {
-            GameObject.Find("Tile_Effect").transform.Find("Thunder").gameObject.GetComponent<Animator>().CrossFade("Thunder", 0f);
+            GameObject.Find("Tile_Effect").transform.Find("Thunder").gameObject.GetComponent<Animator>().CrossFade("Thunder", 0f); //play thunder animation
+
+            GetComponent<Animator>().CrossFade("Stun_A", 0f); //play character animation
 
             playerAttack.WaitToMoveAfterAttack(); // HACK : this will result in player not being able to move for 1 second
         }
