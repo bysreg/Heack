@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcde73bca2c53514f95da15f4398b8f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawnTime: 6
+  maxSpawnTime: 15
   maxBlinkTime: 2
   maxFlipTime: .200000003
   playerMessanger: {fileID: 0}
@@ -239,7 +239,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpawnTime
-      value: 6
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxBlinkTime
